@@ -18,6 +18,8 @@ import by.htp.library.command.impl.ShowAddNewBookForm;
 import by.htp.library.command.impl.ViewAllBooks;
 import by.htp.library.command.impl.ShowDeleteBookForm;
 import by.htp.library.command.impl.ShowEditProfileForm;
+import by.htp.library.command.impl.ShowEnterForm;
+import by.htp.library.command.impl.ShowRegistrationForm;
 import by.htp.library.command.impl.ViewBook;
 
 
@@ -40,6 +42,8 @@ public class CommandProvider {
 		commands.put(CommandName.EDITPROFILEPASSWORDFORM, new EditProfilePasswordForm());
 		commands.put(CommandName.EDITPROFILEPASSWORD, new EditProfilePassword());
 		commands.put(CommandName.READBOOK, new ReadBook());
+		commands.put(CommandName.SHOWENTERFORM, new ShowEnterForm());
+		commands.put(CommandName.SHOWREGISTRATIONFORM, new ShowRegistrationForm());
 		
 	}
 

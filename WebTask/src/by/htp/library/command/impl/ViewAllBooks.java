@@ -28,7 +28,7 @@ public class ViewAllBooks implements Command {
 		if (request.getParameter("loc") != null) {
 			if (request.getParameter("loc").equals("ru")) {
 
-				request.setAttribute("LOCALE", "ru");
+				request.setAttribute("locale", "ru");
 			}
 	}
 
