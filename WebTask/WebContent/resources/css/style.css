@@ -27,10 +27,11 @@ html, body {
 	float:right;
 }
 .eLibrary{
-	margin: 0px 10px 52px 61px;
+	margin: 50px 50px 52px 61px;
 	border: 1px solid silver;
+	color: #ffff1a;
 }
 .eLibrary h2{
-	float:left;
+	text-align: center
 }
 

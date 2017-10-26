@@ -58,11 +58,11 @@
 		</div>
 
 
-	<div id="eLibrary">
+	<div style="text-align: center; margin: -100px 200px 0px 150px;color: #ffff1a">
 	
-		<h2>
+		<h1>
 			<fmt:message key="label.electronicLibrary" />
-		</h2>
+		</h1>
 		</div>
 	
 		
@@ -72,6 +72,7 @@
 				<br />
 			</c:if>
 
+			<br />
 			<br />
 		
 	<h3>
