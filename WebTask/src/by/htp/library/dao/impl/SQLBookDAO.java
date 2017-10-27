@@ -45,7 +45,7 @@ public class SQLBookDAO implements BookDAO {
 				int id = rs.getInt(FIRST);
 				String writer = rs.getString(SECOND);
 				String NameBook = rs.getString(THIRD);
-				String image = rs.getString(6);
+				String image = rs.getString(5);
 				
 				book = new Book(id,writer, NameBook, image);
 				List.add(book);
@@ -84,7 +84,7 @@ public class SQLBookDAO implements BookDAO {
 
 			ps.setString(FIRST, writer);
 			ps.setString(SECOND,  nameBook);
-			ps.setString(6,image);
+			ps.setString(5,image);
 			ps.executeUpdate();
 
 			ps = con.prepareStatement(BOOK_SELECT);
@@ -95,7 +95,7 @@ public class SQLBookDAO implements BookDAO {
 				int id = rs.getInt(FIRST);
 				String NameBook = rs.getString(SECOND);
 				String Writer = rs.getString(THIRD);
-				String Image = rs.getString(6);
+				String Image = rs.getString(5);
 				
 				book= new Book(id, NameBook , Writer, Image);
 			}

@@ -18,13 +18,13 @@ html, body {
 }
 #inline{
 	display:inline-block;
-	width: 100%;	
+		width: 100%;
 
 }
 #content{
 	border: 4px double black;	
     background: #fdf7bd; /* Цвет фона */
-    padding: 50px; /* Поля вокруг текста */
+    padding: 10px; /* Поля вокруг текста */
     float: left;
 	display:block;
  
@@ -34,8 +34,17 @@ html, body {
     background: #fdf7bd; /* Цвет фона */
     display:block;
     padding: 10px; 
-    float: right;
-  
+    float: right; 
+}
+#book{
+	border: 2px solid black;
+}
+#image{
+	float: left; 
+
+}
+#information{
+	margin: 70px 0px 50px 0px;
 }
 #footer {
 	left: 0px;
@@ -50,18 +59,6 @@ html, body {
 	float:left;
 }
 #languageEn{
-clear: both;
-}
-#w{
-	 position: relative;
-}
 
-.eLibrary{
-	margin: 50px 50px 52px 61px;
-	border: 1px solid silver;
-	color: #ffff1a;
-}
-.eLibrary h2{
-	text-align: center
 }
 

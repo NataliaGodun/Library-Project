@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>ELibrary</title>
 <link rel="stylesheet" type="text/css" 
-	href="<c:url value="/resources/css/style2.css" />"/>
+	href="<c:url value="/resources/css/style.css" />"/>
 </head>
 <body>
 	<fmt:setLocale value="en" />
@@ -47,7 +47,7 @@
 			</form>
 		</div>
 	</div>
-		
+	<br />	
 	<c:if test="${not empty  requestScope.Message }">
 		<c:out value="${  requestScope.Message }" />
 			<br />
@@ -60,30 +60,41 @@
 				<fmt:message key="label.availableBooks" />
 			</h3>
 			<br />
-	
-			<c:forEach items="${requestScope.List}" var="List">
-				<h2>
-				<c:out value=" ${List.nazvanie}" />
-				<c:out value=" ${List.avtor}" />
-				
-				<c:if test="${not empty  List.image}">
-				 <img src="${pageContext.request. contextPath}/resources/images/${  List.image }"/>
-				</c:if>
-				</h2>
 			
-				<form action="Controller" method="get">
-					<input type="hidden" name="command" value="viewBook" /> 
-					<input type="hidden" name="id" value=" ${List.id}" /> 
-					<input type="submit" value="View book" />
-				</form>
+			<c:forEach items="${requestScope.List}" var="List">
+			<div id="book">
+				<div id="image">
+					<c:if test="${not empty  List.image}">
+						 <img src="${pageContext.request. contextPath}/resources/images/${  List.image }" width="70%"/>
+					</c:if>
+				</div>
+					
+				<div id="information">
+					<h4>
+					Name:
+					<c:out value=" ${List.nazvanie}" />
+					<br />
+					Writer:
+					<c:out value=" ${List.avtor}" />
+					</h4>
+				
+					<form action="Controller" method="get">
+						<input type="hidden" name="command" value="viewBook" /> 
+						<input type="hidden" name="id" value=" ${List.id}" /> 
+						<input type="submit" value="View book" />
+					</form>
 		
-				<form action="Controller" method="get">
-					<input type="hidden" name="command" value="ReadBook" />
-					 <input type="submit" value="Read book" />
-				</form>
-			</c:forEach>
+					<form action="Controller" method="get">
+						<input type="hidden" name="command" value="ReadBook" />
+						 <input type="submit" value="Read book" />
+					</form>
+					</div>
+				</div>
+				<br />
+				</c:forEach>
+			
 
-			<br />
+		
 	</div>
 
 	<div id="enterReg">
