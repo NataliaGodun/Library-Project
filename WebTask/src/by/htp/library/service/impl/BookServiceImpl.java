@@ -29,7 +29,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public Book addBook(String nameBook, String writer) throws ServiceException {
+	public Book addBook(String nameBook, String writer,String image) throws ServiceException {
 		if (nameBook==null||nameBook.isEmpty()){
 			throw new ServiceException( MESSAGE_WRONG_NAME  );
 		}
@@ -40,7 +40,7 @@ public class BookServiceImpl implements BookService {
 		DAOFactory daoObjectFactory=DAOFactory.getInstance();
 		BookDAO bookDAO=daoObjectFactory.getBookDAO();
 		try {
-			return bookDAO.addBook(nameBook,writer);
+			return bookDAO.addBook(nameBook,writer,image);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}	

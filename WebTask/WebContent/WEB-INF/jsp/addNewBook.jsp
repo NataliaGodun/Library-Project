@@ -11,6 +11,7 @@
 		<input type="hidden" name="command" value="addNewBook" /> Nazvanie knigi:<br />
 		<input type="text" name="nazvanie" value="" /><br /> Avtor:<br /> 
 		<input type="text" name="avtor" value="" /><br />
+		<input type="text" name="image" value="" /><br />
 		 <input type="submit" value="Add new book" /> <br />
 	
 	</form>

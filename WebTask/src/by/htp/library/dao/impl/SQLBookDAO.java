@@ -45,8 +45,9 @@ public class SQLBookDAO implements BookDAO {
 				int id = rs.getInt(FIRST);
 				String writer = rs.getString(SECOND);
 				String NameBook = rs.getString(THIRD);
+				String image = rs.getString(6);
 				
-				book = new Book(id,writer, NameBook);
+				book = new Book(id,writer, NameBook, image);
 				List.add(book);
 			}
 		} catch (ConnectionPoolException e) {
@@ -69,7 +70,7 @@ public class SQLBookDAO implements BookDAO {
 	}
 
 	@Override
-	public Book addBook(String  nameBook, String writer) throws DAOException {
+	public Book addBook(String  nameBook, String writer,String image) throws DAOException {
 		Connection con = null;
 		ResultSet rs = null;
 		Book book= null;
@@ -83,6 +84,7 @@ public class SQLBookDAO implements BookDAO {
 
 			ps.setString(FIRST, writer);
 			ps.setString(SECOND,  nameBook);
+			ps.setString(6,image);
 			ps.executeUpdate();
 
 			ps = con.prepareStatement(BOOK_SELECT);
@@ -93,8 +95,9 @@ public class SQLBookDAO implements BookDAO {
 				int id = rs.getInt(FIRST);
 				String NameBook = rs.getString(SECOND);
 				String Writer = rs.getString(THIRD);
+				String Image = rs.getString(6);
 				
-				book= new Book(id, NameBook , Writer);
+				book= new Book(id, NameBook , Writer, Image);
 			}
 			
 
@@ -120,7 +123,7 @@ public class SQLBookDAO implements BookDAO {
 		Connection con = null;
 		ResultSet rs = null;
 		Book book= null;
-
+/*
 		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
 		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
 		try {
@@ -154,7 +157,7 @@ public class SQLBookDAO implements BookDAO {
 				// Log.ERROR
 				e.printStackTrace();
 			}
-		}
+		}*/
 		return book;
 	}
 
@@ -163,7 +166,7 @@ public class SQLBookDAO implements BookDAO {
 		Connection con = null;
 		ResultSet rs = null;
 		Book book= null;
-		
+		/*
 		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
 		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
 		try {
@@ -200,6 +203,6 @@ public class SQLBookDAO implements BookDAO {
 				// Log.ERROR
 				e.printStackTrace();
 			}
-		}return book;
+		}*/return book;
 	}
 }

@@ -27,6 +27,7 @@ public class AddNewBook implements Command {
 		
 		String	nameBook = request.getParameter(NAME_BOOK);
 		String writer = request.getParameter(NAME_WRITER);
+		String image = request.getParameter("image");
 		
 		ServiceFactory factory=ServiceFactory.getInstance();
 		BookService bookService=factory.getBookService();
@@ -34,7 +35,7 @@ public class AddNewBook implements Command {
 		Book book = null;
 		String page = null;
 		try {
-			book = bookService.addBook(nameBook, writer);
+			book = bookService.addBook(nameBook, writer,image);
 			if (book!=null)	{
 				int i=book.getId();
 				String url=URL_VIEW_BOOK+i;

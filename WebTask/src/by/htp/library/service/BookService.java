@@ -8,7 +8,7 @@ import by.htp.library.service.exception.ServiceException;
 public interface BookService {
 ArrayList<Book> showBooks () throws ServiceException;
 
-Book addBook(String nazvanie, String avtor) throws ServiceException;
+Book addBook(String nazvanie, String avtor, String image) throws ServiceException;
 
 Book viewBook(String id)throws ServiceException;
 

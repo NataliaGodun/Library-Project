@@ -8,29 +8,60 @@ html, body {
 	width: 100%;
 	margin-top: 0px;
 }
+#header h1 {
+	text-align: center; margin: -70px 200px 0px 150px;color: #ffff1a
+}
+#main{
+ background: #dfc220; /* Цвет фона */
+ margin:auto;
+ padding: 5px;
+}
+#inline{
+	display:inline-block;
+	width: 100%;	
 
-#header {
-	
+}
+#content{
+	border: 4px double black;	
+    background: #fdf7bd; /* Цвет фона */
+    padding: 50px; /* Поля вокруг текста */
+    float: left;
+	display:block;
+ 
+    
+}
+#enterReg{
+    background: #fdf7bd; /* Цвет фона */
+    display:block;
+    padding: 10px; 
+    float: right;
+  
+}
+#footer {
+	left: 0px;
+	bottom: 0px;
+	border: 2px solid black;
 }
 
-.language{
-	display: inline;
+#language{
+	 margin: 2px 0px 20px 750px;	
+}
+#languageRu{
+	float:left;
+}
+#languageEn{
+clear: both;
+}
+#w{
+	 position: relative;
+}
 
-}
-.language .ru{	
-	
-	display: block;
-	float:right;
-}
-.language .en{	
-	display: block;
-	float:right;
-}
 .eLibrary{
-	margin: 0px 10px 52px 61px;
+	margin: 50px 50px 52px 61px;
 	border: 1px solid silver;
+	color: #ffff1a;
 }
 .eLibrary h2{
-	float:left;
+	text-align: center
 }
 

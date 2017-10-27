@@ -7,19 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>ELibrary</title>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/style.css"/>" />
+<link rel="stylesheet" type="text/css" 
+	href="<c:url value="/resources/css/style2.css" />"/>
 </head>
 <body>
-
-	<div id="wrapper">
-		<div id="header">
-			<img
-				src="${pageContext.request. contextPath}/resources/images/books.jpg"
-				width="100%" />
-		</div>
-	</div>
-
 	<fmt:setLocale value="en" />
 			<c:if test="${ not empty  requestScope.locale}">
 				<c:set var="language" value="${requestScope.locale}" scope="session" />
@@ -27,81 +18,98 @@
 			</c:if>
 	<fmt:setBundle basename="resources.pagecontent" scope="session" />
 	
-<div style="float:left">
+	<div id="main">
 	
-	<form action="Controller" method="get">
-				<input type="hidden" name="command" value="SHOWENTERFORM" /> 
-				<input type="hidden" name="loc" value="${requestScope.locale}">
-				<input type="submit" value="Enter" />
-			</form>
-				</div>
-			<div style="float:left">
-			<form action="Controller" method="get">
-				<input type="hidden" name="command" value="SHOWREGISTRATIONFORM" /> 
-				<input type="hidden" name="loc" value="${requestScope.locale}">
-				<input type="submit" value="Registration" />
-			</form>
-				</div>
-	<div style="float:right">
+	<div id="wrapper">
+		<div id="header">
+			<img src="${pageContext.request. contextPath}/resources/images/books.jpg" width="100%" />
+			<h1>
+				<fmt:message key="label.electronicLibrary" />
+			</h1>
+		</div>	
+	</div>
+	<br />
+	<br />
+				
+	<div id="language">
+		<div id="languageRu">
 			<form action="Controller" method="get">
 				<input type="hidden" name="command" value="VIEWALLBOOKS" /> 
 				<input type="hidden" name="loc" value="ru" /> 
 				<input type="submit" value="Russian" />
 			</form>
 		</div>
-		<div style="float:right">
+		<div id="languageRu">
 			<form action="Controller" method="get">
 				<input type="hidden" name="command" value="VIEWALLBOOKS" />
 				 <input type="hidden" name="loc" value="en" /> 
 			 	<input type="submit" value="English" />
 			</form>
 		</div>
-
-
-	<div style="text-align: center; margin: -100px 200px 0px 150px;color: #ffff1a">
-	
-		<h1>
-			<fmt:message key="label.electronicLibrary" />
-		</h1>
-		</div>
-	
+	</div>
 		
-		
-			<c:if test="${not empty  requestScope.Message }">
-				<c:out value="${  requestScope.Message }" />
-				<br />
-			</c:if>
-
+	<c:if test="${not empty  requestScope.Message }">
+		<c:out value="${  requestScope.Message }" />
 			<br />
-			<br />
-		
-	<h3>
-			<fmt:message key="label.availableBooks" />
-		</h3>
-	
+	</c:if>
 	<br />
 	
-		
-		<c:forEach items="${requestScope.List}" var="List">
-			<h2>
+	<div id="inline">
+		<div id="content">
+			<h3>
+				<fmt:message key="label.availableBooks" />
+			</h3>
+			<br />
+	
+			<c:forEach items="${requestScope.List}" var="List">
+				<h2>
 				<c:out value=" ${List.nazvanie}" />
 				<c:out value=" ${List.avtor}" />
-			</h2>
-			<form action="Controller" method="get">
-				<input type="hidden" name="command" value="viewBook" /> <input
-					type="hidden" name="id" value=" ${List.id}" /> <input
-					type="submit" value="View book" />
-			</form>
-			<br />
-			<form action="Controller" method="get">
-				<input type="hidden" name="command" value="ReadBook" /> <input
-					type="submit" value="Read book" />
-			</form>
-			<br />
-		</c:forEach>
+				
+				<c:if test="${not empty  List.image}">
+				 <img src="${pageContext.request. contextPath}/resources/images/${  List.image }"/>
+				</c:if>
+				</h2>
+			
+				<form action="Controller" method="get">
+					<input type="hidden" name="command" value="viewBook" /> 
+					<input type="hidden" name="id" value=" ${List.id}" /> 
+					<input type="submit" value="View book" />
+				</form>
+		
+				<form action="Controller" method="get">
+					<input type="hidden" name="command" value="ReadBook" />
+					 <input type="submit" value="Read book" />
+				</form>
+			</c:forEach>
 
+			<br />
+	</div>
+
+	<div id="enterReg">
+		<form action="Controller" method="post">
+			<input type="hidden" name="command" value="authorization" />
+			<fmt:message key="label.login" />
+			<br /> <input type="text" name="login" value="" /><br />
+			<fmt:message key="label.password" />
+			<br /> <input type="password" name="password" value="" /><br /> 
+			<input type="submit" value="sign in" /> <br />
+			
+			<c:if test="${not empty  requestScope.errorMessage }">
+				<c:out value="${  requestScope.errorMessage }" />
+			</c:if>
+		</form>
+				
 		<br />
-
-
+		<form action="Controller" method="get">
+			<input type="hidden" name="command" value="SHOWREGISTRATIONFORM" /> 
+			<input type="hidden" name="loc" value="${requestScope.locale}">
+			<input type="submit" value="Registration" />
+		</form>
+	</div>
+	</div>
+	<div id="w"> lzzz</div>
+	<div id="ww"> pppp</div>
+	</div>
 </body>
 </html>
