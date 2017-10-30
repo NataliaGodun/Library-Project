@@ -24,12 +24,18 @@ html, body {
 #content{
 	border: 4px double black;	
     background: #fdf7bd; /* Цвет фона */
-    padding: 10px; /* Поля вокруг текста */
+    padding:25px;
     float: left;
 	display:block;
     width:70%;
     
 }
+#available{
+	text-align: center;
+	margin: 0px 120px -30px 100px;
+	background: #ede06d;	
+}
+
 #enterReg{
     background: #fdf7bd; /* Цвет фона */
     display:block;

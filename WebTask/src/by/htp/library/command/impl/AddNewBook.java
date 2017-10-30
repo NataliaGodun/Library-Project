@@ -1,11 +1,32 @@
 package by.htp.library.command.impl;
 
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.ibm.useful.http.FileData;
+import com.ibm.useful.http.PostData;
+
 import by.htp.library.command.Command;
 import by.htp.library.domain.Book;
 import by.htp.library.service.BookService;
@@ -22,41 +43,70 @@ public class AddNewBook implements Command {
 	private static final String URL_VIEW_BOOK=" http://localhost:8080/WebNew/Controller?command=viewBook&id=";
 	private static final String MAIN_JSP = "WEB-INF/jsp/main.jsp";
 	private static final String ERROR_JSP = "error.jsp";
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private Random random = new Random();
+	
+	
+		 
+	
 		
-		String	nameBook = request.getParameter(NAME_BOOK);
-		String writer = request.getParameter(NAME_WRITER);
-		String image = request.getParameter("image");
-		
-		ServiceFactory factory=ServiceFactory.getInstance();
-		BookService bookService=factory.getBookService();
-		
-		Book book = null;
-		String page = null;
-		try {
-			book = bookService.addBook(nameBook, writer,image);
-			if (book!=null)	{
-				int i=book.getId();
-				String url=URL_VIEW_BOOK+i;
-				String url2=url+MESSAGE_SUCCESSFUL_ADDITION;
-			     response.sendRedirect(url2);
-			}
-			else{
-				request.setAttribute(ERROR_MESSAGE, MESSAGE_FAILING_ADDITION);
-				page=MAIN_JSP;
-				RequestDispatcher dispatcher=request.getRequestDispatcher(page);
-				dispatcher.forward(request, response);
-			}
-		} catch (ServiceException e) {
-			request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
-			page=ERROR_JSP;
-			RequestDispatcher dispatcher=request.getRequestDispatcher(page);
-			dispatcher.forward(request, response);
-		}
-			
-		
-			
+		@Override
+		public void execute(HttpServletRequest request,
+	        HttpServletResponse response)
+	        throws ServletException, IOException {
+	    response.setContentType("text/html;charset=UTF-8");
+
+	    // Create path components to save the file
+	    final String path = request.getParameter("destination");
+	    final Part filePart = request.getPart("file");
+	    final String fileName = getFileName(filePart);
+
+	    OutputStream out = null;
+	    InputStream filecontent = null;
+	    final PrintWriter writer = response.getWriter();
+
+	    try {
+	        out = new FileOutputStream(new File(path + File.separator
+	                + fileName));
+	        filecontent = filePart.getInputStream();
+
+	        int read = 0;
+	        final byte[] bytes = new byte[1024];
+
+	        while ((read = filecontent.read(bytes)) != -1) {
+	            out.write(bytes, 0, read);
+	        }
+	        writer.println("New file " + fileName + " created at " + path);
+	     
+	    } catch (FileNotFoundException fne) {
+	        writer.println("You either did not specify a file to upload or are "
+	                + "trying to upload a file to a protected or nonexistent "
+	                + "location.");
+	        writer.println("<br/> ERROR: " + fne.getMessage());
+
+	        
+	    } finally {
+	        if (out != null) {
+	            out.close();
+	        }
+	        if (filecontent != null) {
+	            filecontent.close();
+	        }
+	        if (writer != null) {
+	            writer.close();
+	        }
+	    }
 	}
 
+	private String getFileName(final Part part) {
+	    final String partHeader = part.getHeader("content-disposition");
+	   
+	    for (String content : part.getHeader("content-disposition").split(";")) {
+	        if (content.trim().startsWith("filename")) {
+	            return content.substring(
+	                    content.indexOf('=') + 1).trim().replace("\"", "");
+	        }
+	    }
+	    return null;
+	}
+	
 }

@@ -56,10 +56,11 @@
 	
 	<div id="inline">
 		<div id="content">
-			<h3>
+			<div id="available">
+			<h1>
 				<fmt:message key="label.availableBooks" />
-			</h3>
-			<br />
+			</h1>
+			</div>
 			
 			<c:forEach items="${requestScope.List}" var="List">
 			<div id="book">
