@@ -55,6 +55,7 @@
 	</c:if>
 	<br />
 	
+	
 	<div id="inline">
 		<div id="content">
 			<div id="available">
@@ -131,6 +132,12 @@
 			<input type="submit" value="Registration" />
 		</form>
 	</div>
+			<br />
+			<br />
+	<form action="Controller" method="get">
+						<input type="hidden" name="command" value="ShowAddNewBookForm" /> 
+						<input type="submit" value="Add new book" />
+					</form>
 	</div>
 	<div id="footer"> All right reserved</div>
 	
