@@ -13,6 +13,7 @@ public class BookServiceImpl implements BookService {
 	private static final String MESSAGE_WRONG_NAME = "Incorrect name of the book";
 	private static final String MESSAGE_WRONG_WRITER= "Incorrect writer";
 	private static final String MESSAGE_WRONG_ID= "This book is not available";
+	private static final String MESSAGE_WRONG_IMAGE = null;
 	
 	public ArrayList<Book> showBooks () throws ServiceException{
 	
@@ -29,7 +30,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public Book addBook(String nameBook, String writer,String image) throws ServiceException {
+	public Book addBook( String writer,String  nameBook, String genre,String house,String year  ) throws ServiceException {
 		if (nameBook==null||nameBook.isEmpty()){
 			throw new ServiceException( MESSAGE_WRONG_NAME  );
 		}
@@ -40,7 +41,7 @@ public class BookServiceImpl implements BookService {
 		DAOFactory daoObjectFactory=DAOFactory.getInstance();
 		BookDAO bookDAO=daoObjectFactory.getBookDAO();
 		try {
-			return bookDAO.addBook(nameBook,writer,image);
+			return bookDAO.addBook(nameBook,writer,genre,house,year);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}	
@@ -76,7 +77,21 @@ public class BookServiceImpl implements BookService {
 			throw new ServiceException(e);
 		}	
 	}
-		 
-	
+
+	@Override
+	public Book addImageBook(String image)  throws ServiceException {
+			if (image==null||image.isEmpty()){
+				throw new ServiceException( MESSAGE_WRONG_IMAGE  );
+			}
+			
+			DAOFactory daoObjectFactory=DAOFactory.getInstance();
+			BookDAO bookDAO=daoObjectFactory.getBookDAO();
+			try {
+				return bookDAO.addImageBook(image);
+			} catch (DAOException e) {
+				throw new ServiceException(e);
+				
+		}
+	}
 }
 

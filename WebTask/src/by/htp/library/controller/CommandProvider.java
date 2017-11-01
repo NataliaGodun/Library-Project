@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import by.htp.library.command.Command;
+import by.htp.library.command.impl.AddImageBook;
 import by.htp.library.command.impl.AddNewBook;
 import by.htp.library.command.impl.Authorization;
 import by.htp.library.command.impl.DeleteBook;
@@ -42,6 +43,7 @@ public class CommandProvider {
 		commands.put(CommandName.EDITPROFILEPASSWORD, new EditProfilePassword());
 		commands.put(CommandName.READBOOK, new ReadBook());
 		commands.put(CommandName.SHOWREGISTRATIONFORM, new ShowRegistrationForm());
+		commands.put(CommandName.ADDIMAGEBOOK, new AddImageBook());
 		
 	}
 

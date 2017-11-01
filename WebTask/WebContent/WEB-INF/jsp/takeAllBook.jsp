@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>ELibrary</title>
 <link rel="stylesheet" type="text/css" 
-	href="<c:url value="/resources/css/style.css" />"/>
+	href="<c:url value="/resources/css/style2.css" />"/>
 </head>
 <body>
 	<fmt:setLocale value="en" />
@@ -17,6 +17,7 @@
 				<fmt:setLocale value="${language}" />
 			</c:if>
 	<fmt:setBundle basename="resources.pagecontent" scope="session" />
+	
 	
 	<div id="main">
 	
@@ -71,13 +72,22 @@
 				</div>
 					
 				<div id="information">
-					<h4>
-					Name:
-					<c:out value=" ${List.nazvanie}" />
+				
+				<strong>Name:</strong>
+					<c:out value=" ${List.nameBook}" />
 					<br />
-					Writer:
-					<c:out value=" ${List.avtor}" />
-					</h4>
+					<strong>Writer:</strong>
+					<c:out value=" ${List.writer}" />
+					<br />
+					<strong>Genre:</strong>
+					<c:out value="${ List.genre}"/>
+					<br />
+					<strong>Published House:</strong>
+					<c:out value="${ List.house}"/>
+					<br />
+					<strong>Year:</strong>
+					<c:out value="${ List.year}"/>
+					<br />
 				
 					<form action="Controller" method="get">
 						<input type="hidden" name="command" value="viewBook" /> 
@@ -113,6 +123,8 @@
 		</form>
 				
 		<br />
+		
+		<img src="d:/ddd/2039217253.txt"  />
 		<form action="Controller" method="get">
 			<input type="hidden" name="command" value="SHOWREGISTRATIONFORM" /> 
 			<input type="hidden" name="loc" value="${requestScope.locale}">
@@ -120,8 +132,8 @@
 		</form>
 	</div>
 	</div>
-	<div id="w"> lzzz</div>
-	<div id="ww"> pppp</div>
+	<div id="footer"> All right reserved</div>
+	
 	</div>
 </body>
 </html>

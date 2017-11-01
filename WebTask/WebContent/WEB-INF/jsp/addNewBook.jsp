@@ -7,10 +7,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <form action="Controller" method="post" enctype="multipart/form-data">
-		Select file to upload: <input type="file" name="uploadFile" />
-            <br/><br/>
-            <input type="submit" value="Upload" />
+        <form action="Controller" method="post" >
+        <input type="hidden" name="command" value="addNewBook"/>
+        writer: <input type="text" name="writer" value="" /> 
+        <br/>
+		 name Book: <input type="text" name="nameBook" value="" /> 
+        <br/>
+         genre: <input type="text" name="genre" value="" /> 
+        <br/>
+         Publishing house: <input type="text" name="house" value="" /> 
+        <br/>
+         Publishing year: <input type="text" name="year" value="" /> 
+        <br/>
+            <input type="submit" value="Add new book" />
 	</form>
     </body>
     </html>
