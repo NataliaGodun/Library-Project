@@ -9,11 +9,21 @@
     <body>
         <form action="Controller" method="post" enctype="multipart/form-data">
         
-		File:
-            <input type="file" name="file" id="file" /> <br/>
-            Destination:
-            <input type="text" value="/tmp" name="destination"/>
+		
+            writer:
+            <input type="text" value="" name="writer"/> <br/>
+            name book:
+            <input type="text" value="" name="nameBook"/> <br/>
+           genre:
+            <input type="text" value="" name="genre"/> <br/>
+           house:
+            <input type="text" value="" name="house"/> <br/>
+            year :
+            <input type="text" value="" name="year "/>
+            
             <br/>
+            File:
+            <input type="file" name="file" id="file" /> <br/>
             <input type="submit" value="Upload" name="upload" id="upload" />
 	</form>
     </body>

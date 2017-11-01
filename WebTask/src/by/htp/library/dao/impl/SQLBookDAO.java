@@ -17,7 +17,7 @@ import by.htp.library.domain.Book;
 
 public class SQLBookDAO implements BookDAO {
 	private static final String SELECT_ALL_BOOK = "SELECT * FROM BOOKS WHERE STATUS='EXIST'";
-	private static final String ADD_BOOK = "INSERT INTO BOOKS (WRITER,NAMEBOOK,GENRE,PUBLISHINGHOUSE,PUBLISHINGYEAR,STATUS) VALUES(?,?,?,?,?,'EXIST')";
+	private static final String ADD_BOOK = "INSERT INTO BOOKS (WRITER,NAMEBOOK,IMAGE,GENRE,PUBLISHINGHOUSE,PUBLISHINGYEAR,STATUS) VALUES(?,?,?,?,?,?,'EXIST')";
 	private static final String BOOK_SELECT = "SELECT * FROM BOOKS WHERE WRITER=? AND NAMEBOOK=? AND STATUS='EXIST'";
 	private static final String SELECT_BOOK_ID = "SELECT * FROM BOOKS WHERE ID=? AND STATUS='EXIST' ";
 	private static final String DELETE_BOOK_NAME_WRITER = "UPDATE BOOK SET STATUS='DELETE' WHERE NAME=? AND NAZVANIE=?";
@@ -77,7 +77,7 @@ public class SQLBookDAO implements BookDAO {
 	}
 
 	@Override
-	public Book addBook( String writer,String  nameBook, String genre,String house,String year ) throws DAOException {
+	public Book addBook( String writer,String  nameBook,String pathImage, String genre,String house,String year ) throws DAOException {
 		System.out.println( "v dao");
 		Connection con = null;
 		ResultSet rs = null;
@@ -92,9 +92,10 @@ public class SQLBookDAO implements BookDAO {
 	
 			ps.setString(FIRST, writer);
 			ps.setString(SECOND,  nameBook);
-			ps.setString(THIRD,genre);
-			ps.setString(FOURTH,house);
-			ps.setString(FIFTH,year);
+			ps.setString(THIRD,pathImage);
+			ps.setString(FOURTH,genre);
+			ps.setString(FIFTH,house);
+			ps.setString(SIXTH,year);
 	
 			
 			ps.executeUpdate();
@@ -228,62 +229,6 @@ public class SQLBookDAO implements BookDAO {
 		}*/return book;
 	}
 
-	@Override
-	public Book addImageBook(String image) throws DAOException {
-		System.out.println( "v dao");
-		Connection con = null;
-		ResultSet rs = null;
-		Book book= null;
-		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
-		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
-		System.out.println( "pered try");
-		try {
-			con = cp.takeConnection();
-			
-			PreparedStatement ps = con.prepareStatement(ADD_BOOK);
 	
-			ps.setString(FIRST, image);
-			ps.setString(SECOND,  nameBook);
-			ps.setString(THIRD,genre);
-			ps.setString(FOURTH,house);
-			ps.setString(FIFTH,year);
-	
-			
-			ps.executeUpdate();
-			System.out.println( "posle update");
-
-			ps = con.prepareStatement(BOOK_SELECT);
-			ps.setString(FIRST, writer);
-			ps.setString(SECOND, nameBook );
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				int id = rs.getInt(FIRST);
-				String Writer = rs.getString(SECOND);
-				String NameBook = rs.getString(THIRD);
-				String Image = rs.getString(FOURTH);
-				String Genre = rs.getString(FIFTH);
-				String House = rs.getString(SIXTH);
-				String Year = rs.getString(SEVENTH);
-			
-				
-				book = new Book(id,Writer, NameBook, Image,Genre,House,Year);
-			}
-			
-
-		} catch (ConnectionPoolException e) {
-			throw new DAOException(e);
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
-		finally{
-			try {
-				cp.removeConnection();
-			} catch (ConnectionPoolException e) {
-				// Log.ERROR
-				e.printStackTrace();
-			}
-		}
-		return book;
-	}
 
 }

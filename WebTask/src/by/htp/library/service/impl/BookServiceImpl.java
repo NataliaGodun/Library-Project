@@ -30,18 +30,18 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public Book addBook( String writer,String  nameBook, String genre,String house,String year  ) throws ServiceException {
+	public Book addBook( String Writer,String  nameBook,String pathImage, String genre,String house,String year  ) throws ServiceException {
 		if (nameBook==null||nameBook.isEmpty()){
 			throw new ServiceException( MESSAGE_WRONG_NAME  );
 		}
-		if (writer==null||writer.isEmpty()){
+		if (Writer==null||Writer.isEmpty()){
 			throw new ServiceException( MESSAGE_WRONG_WRITER );
 		}
 		
 		DAOFactory daoObjectFactory=DAOFactory.getInstance();
 		BookDAO bookDAO=daoObjectFactory.getBookDAO();
 		try {
-			return bookDAO.addBook(nameBook,writer,genre,house,year);
+			return bookDAO.addBook(Writer,nameBook,pathImage,genre,house,year);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}	
@@ -78,20 +78,6 @@ public class BookServiceImpl implements BookService {
 		}	
 	}
 
-	@Override
-	public Book addImageBook(String image)  throws ServiceException {
-			if (image==null||image.isEmpty()){
-				throw new ServiceException( MESSAGE_WRONG_IMAGE  );
-			}
-			
-			DAOFactory daoObjectFactory=DAOFactory.getInstance();
-			BookDAO bookDAO=daoObjectFactory.getBookDAO();
-			try {
-				return bookDAO.addImageBook(image);
-			} catch (DAOException e) {
-				throw new ServiceException(e);
-				
-		}
-	}
+	
 }
 

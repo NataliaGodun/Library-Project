@@ -67,7 +67,7 @@
 			<div id="book">
 				<div id="image">
 					<c:if test="${not empty  List.image}">
-						 <img src="${pageContext.request. contextPath}/resources/images/${  List.image }" width="70%"/>
+						 <img src="${  List.image }" width="70%"/>
 					</c:if>
 				</div>
 					
@@ -124,7 +124,7 @@
 				
 		<br />
 		
-		<img src="d:/ddd/2039217253.txt"  />
+		
 		<form action="Controller" method="get">
 			<input type="hidden" name="command" value="SHOWREGISTRATIONFORM" /> 
 			<input type="hidden" name="loc" value="${requestScope.locale}">
