@@ -1,37 +1,34 @@
 package by.htp.library.controller;
 
 
+
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import by.htp.library.command.Command;
 import by.htp.library.dao.connection.pool.ConnectionPool;
 import by.htp.library.dao.connection.pool.ConnectionPoolException;
 import by.htp.library.dao.connection.pool.ConnectionPoolFactory;
 import by.htp.library.domain.Book;
-import by.htp.library.service.BookService;
-import by.htp.library.service.exception.ServiceException;
-import by.htp.library.service.factory.ServiceFactory;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 
 
 @MultipartConfig
@@ -62,15 +59,39 @@ public class Controller extends HttpServlet {
 			
 			
 		}
-		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-			String commandName=request.getParameter(COMMAND);
-		  
-			Command command=PROVIDER.getCommand(commandName);
-			command.execute(request, response);
-			
+		@Override
+		protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
+			super.service(arg0, arg1);
 		}
 		
+		protected void doGet(HttpServletRequest request,
+	            HttpServletResponse response) throws ServletException, IOException {
+			String commandName = null;
+			if(request.getParameter("command") != null){
+				commandName = request.getParameter("command");
+				System.out.println(commandName);
+				Command command = PROVIDER.getCommand(commandName);
+				command.execute(request, response);	
+			}else{
+			processRequest(request,response);
+			}
+		}
+
+
+		private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//	String i="C:/Users/Dima/git/Library-Project/WebTask/WebContent/resources/images/374.jpg";
+			String i=request.getParameter("index");
+			OutputStream outputStream=response.getOutputStream();
+			try{
+			byte [] imageContent=Files.readAllBytes(Paths.get(i));
+			
+			response.setContentType("image/jpg");
+			outputStream.write(imageContent);
+			
+		}finally{
+			outputStream.close();
+		}
+		}
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 			boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -80,11 +101,12 @@ public class Controller extends HttpServlet {
 				command.execute(request, response);
 			}
 			else{
-				String commandName=("AddNewBook");
-				Command command=PROVIDER.getCommand(commandName);
+				Command command=PROVIDER.getCommand("AddNewBook");
 				command.execute(request, response);
 			}
 		}
+		
+	
 
 		 
 		public void destroy(){

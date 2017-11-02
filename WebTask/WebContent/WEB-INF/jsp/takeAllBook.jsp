@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	import="by.htp.library.domain.Book" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -68,7 +69,7 @@
 			<div id="book">
 				<div id="image">
 					<c:if test="${not empty  List.image}">
-						 <img src="${pageContext.request. contextPath}/resources/images/${List.image}" width="70%"/>
+						  <img src="${pageContext.request. contextPath}/Controller?index=${List.image}" width="70%"/>
 					</c:if>
 				</div>
 					
