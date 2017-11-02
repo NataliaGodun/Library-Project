@@ -1,3 +1,4 @@
+
 package by.htp.library.command.impl;
 
 import java.io.IOException;
@@ -37,6 +38,9 @@ public class ViewBook implements Command {
 		String page = null;
 		try {
 			book = bookService.viewBook(id);
+			
+			
+			
 			if (book!=null)	{
 				request.setAttribute(BOOK, book);
 			     page=VIEW_JSP;

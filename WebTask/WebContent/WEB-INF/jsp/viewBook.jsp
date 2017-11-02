@@ -13,8 +13,8 @@
 	
 	<div id="book">
 				<div id="image">
-					<c:if test="${not empty  requestScope.book}">
-						 <img src="${  requestScope.book.image }" width="70%"/>
+					<c:if test="${not empty  requestScope.book.image}">
+						  <img src="${pageContext.request. contextPath}/resources/images/${requestScope.book.image}" width="70%"/>
 					</c:if>
 				</div>
 					

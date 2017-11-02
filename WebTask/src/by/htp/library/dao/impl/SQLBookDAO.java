@@ -1,3 +1,4 @@
+
 package by.htp.library.dao.impl;
 
 import java.sql.Connection;
@@ -196,12 +197,10 @@ public class SQLBookDAO implements BookDAO {
 			con = cp.takeConnection();
 			
 			PreparedStatement ps = con.prepareStatement(DELETE_BOOK_NAME_WRITER );
-
 			ps.setString(FIRST, writer);
 			ps.setString(SECOND, nameBook);
 			
 			ps.executeUpdate();
-
 			ps = con.prepareStatement(BOOK_SELECT);
 			ps.setString(FIRST, writer);
 			ps.setString(SECOND, nameBook);
@@ -213,7 +212,6 @@ public class SQLBookDAO implements BookDAO {
 				
 				book= new Book(id,  NameBook , Writer);
 			}
-
 		} catch (ConnectionPoolException e) {
 			throw new DAOException(e);
 		} catch (SQLException e) {

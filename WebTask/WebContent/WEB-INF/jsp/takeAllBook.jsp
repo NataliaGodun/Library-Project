@@ -68,7 +68,7 @@
 			<div id="book">
 				<div id="image">
 					<c:if test="${not empty  List.image}">
-						 <img src="${  List.image }" width="70%"/>
+						 <img src="${pageContext.request. contextPath}/resources/images/${List.image}" width="70%"/>
 					</c:if>
 				</div>
 					
@@ -139,6 +139,8 @@
 						<input type="submit" value="Add new book" />
 					</form>
 	</div>
+	
+	
 	<div id="footer"> All right reserved</div>
 	
 	</div>

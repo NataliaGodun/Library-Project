@@ -57,16 +57,15 @@ public class AddNewBook implements Command {
 		 File uploadetFile = null;
 	
 		 String pathImage;
-		 
+		 String nameImage;
 	
 		 
 		 
 		 
 			//выбираем файлу имя пока не найдём свободное
 		 do{
-			 pathImage = ("C:/Users/Dima/git/Library-Project/WebTask/WebContent/resources/images/" +  random.nextInt(1000)+".txt");	
-				  
-				System.out.println(pathImage);
+			 nameImage=random.nextInt(1000)+".jpg";
+			 pathImage = ("C:/Users/Dima/git/Library-Project/WebTask/WebContent/resources/images/" + nameImage );	
 				uploadetFile = new File(pathImage);		
 			}while(uploadetFile.exists());
 		
@@ -101,7 +100,7 @@ public class AddNewBook implements Command {
 				Book book = null;
 				String page = null;
 				try {
-					book = bookService.addBook( Writer,nameBook,pathImage,genre,house,year);
+					book = bookService.addBook( Writer,nameBook,nameImage,genre,house,year);
 					 System.out.println(book.getId());
 					if (book!=null)	{
 						int i=book.getId();
