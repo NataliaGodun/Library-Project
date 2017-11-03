@@ -39,6 +39,12 @@
 		<c:if test="${not empty  requestScope.errorMessage}">
 			<c:out value="${  requestScope.errorMessage }" />
 		</c:if>
+		
+		<form action="Controller" method="get">
+						<input type="hidden" name="command" value="DeleteBook" /> 
+						<input type="hidden" name="id" value=" ${requestScope.book.id}"/> 
+						<input type="submit" value="Delete book" />
+					</form>
 	</div>
 	</div>
 

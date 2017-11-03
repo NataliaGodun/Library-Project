@@ -62,17 +62,15 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public Book deleteBook(String nameBook, String writer) throws ServiceException {
-		if (nameBook==null||nameBook.isEmpty()){
+	public Book deleteBook(String id) throws ServiceException {
+		if (id==null||id.isEmpty()){
 			throw new ServiceException( MESSAGE_WRONG_NAME  );
 		}
-		if (writer==null||writer.isEmpty()){
-			throw new ServiceException( MESSAGE_WRONG_WRITER );
-		}
+		
 		DAOFactory daoObjectFactory=DAOFactory.getInstance();
 		BookDAO bookDAO=daoObjectFactory.getBookDAO();
 		try {
-			return bookDAO.deleteBook(nameBook,writer);
+			return bookDAO.deleteBook(id);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}	

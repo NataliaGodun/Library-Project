@@ -101,6 +101,12 @@
 						<input type="hidden" name="command" value="ReadBook" />
 						 <input type="submit" value="Read book" />
 					</form>
+					
+					<form action="Controller" method="get">
+						<input type="hidden" name="command" value="viewBook" /> 
+						<input type="hidden" name="id" value=" ${List.id}" /> 
+						<input type="submit" value="Delete book" />
+					</form>
 					</div>
 				</div>
 				<br />

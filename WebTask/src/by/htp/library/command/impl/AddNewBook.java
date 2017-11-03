@@ -1,26 +1,16 @@
 package by.htp.library.command.impl;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.Random;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 import by.htp.library.command.Command;
 import by.htp.library.domain.Book;
 import by.htp.library.service.BookService;
@@ -50,8 +40,7 @@ public class AddNewBook implements Command {
 		 final String nameBook=request.getParameter("nameBook");
 		 final String genre=request.getParameter("genre");
 		 final String house=request.getParameter("house");
-		 final String year =request.getParameter("year ");
-		 System.out.println(Writer);
+		 final String year =request.getParameter("year");
 		 final Part filePart=request.getPart("file");
 		   
 		 File uploadetFile = null;
@@ -59,12 +48,8 @@ public class AddNewBook implements Command {
 		 String pathImage;
 		 String nameImage;
 	
-		 
-		 
-		 
-			//выбираем файлу имя пока не найдём свободное
+		//выбираем файлу имя пока не найдём свободное
 		 do{
-			// nameImage=random.nextInt(1000)+".jpg";
 			 pathImage = ("C:/Users/Dima/git/Library-Project/WebTask/WebContent/resources/images/" + random.nextInt(1000)+".jpg");	
 				uploadetFile = new File(pathImage);		
 			}while(uploadetFile.exists());
@@ -87,8 +72,7 @@ public class AddNewBook implements Command {
 		        while ((read = filecontent.read(bytes)) != -1) {
 		            out.write(bytes, 0, read);
 		        }
-		        //writer.println("New file " +   " created at " +pathImage);
-		        
+		       
 		        
 		        
 		        System.out.println(pathImage);
@@ -124,13 +108,7 @@ public class AddNewBook implements Command {
 					RequestDispatcher dispatcher=request.getRequestDispatcher(page);
 					dispatcher.forward(request, response);
 					}	
-					
-				
-			
-		       
-		 
-
-		        
+						        
 		    } finally {
 		        if (out != null) {
 		            out.close();
@@ -143,116 +121,7 @@ public class AddNewBook implements Command {
 		        }
 		    }}}
 	
-	/*		
 	
-		  System.out.println(pathImage);
-		
-			 System.out.println( "pered fabricoi");
-			ServiceFactory factory=ServiceFactory.getInstance();
-			BookService bookService=factory.getBookService();
-			
-			Book book = null;
-			String page = null;
-			try {
-				book = bookService.addBook( Writer,nameBook,pathImage,genre,house,year);
-				 System.out.println(book.getId());
-				if (book!=null)	{
-					int i=book.getId();
-					//String url=URL_VIEW_BOOK+i;
-					//String url2=url+MESSAGE_SUCCESSFUL_ADDITION;
-					// System.out.println( url2);
-				//response.sendRedirect(url2);
-					RequestDispatcher dispatcher=request.getRequestDispatcher("message.jsp");
-					dispatcher.forward(request, response);
-				}
-				//else{
-				//	request.setAttribute(ERROR_MESSAGE, MESSAGE_FAILING_ADDITION);
-				//	page=MAIN_JSP;
-				//	RequestDispatcher dispatcher=request.getRequestDispatcher(page);
-				//	dispatcher.forward(request, response);
-				//}
-			} catch (ServiceException e) {
-				System.out.println( "catch");
-				request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
-				page=MAIN_JSP;
-				RequestDispatcher dispatcher=request.getRequestDispatcher(page);
-				dispatcher.forward(request, response);
-				}	
-				}
-			
-		
-		
-}
-
-		/*private String getFileName(final Part part) {
-		    final String partHeader = part.getHeader("content-disposition");
-		  
-		    for (String content : part.getHeader("content-disposition").split(";")) {
-		        if (content.trim().startsWith("filename")) {
-		            return content.substring(
-		                    content.indexOf('=') + 1).trim().replace("\"", "");
-		        }
-		    }
-		    return null;
-		}
- private String extractFileName(Part part) {
-        String contentDisp = part.getHeader("content-disposition");
-        String[] items = contentDisp.split(";");
-        for (String s : items) {
-            if (s.trim().startsWith("filename")) {
-                return s.substring(s.indexOf("=") + 2, s.length()-1);
-            }
-        }
-        return "";
-    }
-}
-}	
-}
-	*/	
-		
-		
-		/*
-       
-		String	nameBook = request.getParameter(NAME_BOOK);
-		String writer = request.getParameter(NAME_WRITER);
-		String	genre = request.getParameter("genre");
-		String	house = request.getParameter("house");
-		String	year = request.getParameter("year");
-		
-		 System.out.println( "pered fabricoi");
-		ServiceFactory factory=ServiceFactory.getInstance();
-		BookService bookService=factory.getBookService();
-		
-		Book book = null;
-		String page = null;
-		try {
-			book = bookService.addBook( writer,nameBook,genre,house,year);
-			 System.out.println(book.getId());
-			if (book!=null)	{
-				int i=book.getId();
-				String url=URL_VIEW_BOOK+i;
-				String url2=url+MESSAGE_SUCCESSFUL_ADDITION;
-				 System.out.println( url2);
-			response.sendRedirect(url2);
-			
-			}
-			//else{
-			//	request.setAttribute(ERROR_MESSAGE, MESSAGE_FAILING_ADDITION);
-			//	page=MAIN_JSP;
-			//	RequestDispatcher dispatcher=request.getRequestDispatcher(page);
-			//	dispatcher.forward(request, response);
-			//}
-		} catch (ServiceException e) {
-			System.out.println( "catch");
-			request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
-			page=MAIN_JSP;
-			RequestDispatcher dispatcher=request.getRequestDispatcher(page);
-			dispatcher.forward(request, response);
-			}	
-			}
-		
-	}	
-		*/
         
 
     

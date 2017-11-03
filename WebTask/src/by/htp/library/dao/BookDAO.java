@@ -12,6 +12,6 @@ Book addBook( String writer,String  nameBook,String pathImage, String genre,Stri
 
 Book viewBook(String id) throws DAOException;
 
-Book deleteBook(String nazvanie, String avtor)throws DAOException;
+Book deleteBook(String id)throws DAOException;
 
 }

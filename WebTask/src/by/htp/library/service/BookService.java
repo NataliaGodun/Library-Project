@@ -12,6 +12,6 @@ Book addBook( String writer,String  nameBook,String pathImage, String genre,Stri
 
 Book viewBook(String id)throws ServiceException;
 
-Book deleteBook(String nazvanie, String avtor) throws ServiceException;
+Book deleteBook(String id) throws ServiceException;
 
 }
