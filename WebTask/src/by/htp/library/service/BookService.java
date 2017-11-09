@@ -14,4 +14,6 @@ Book viewBook(String id)throws ServiceException;
 
 Book deleteBook(String id) throws ServiceException;
 
+Book searchBook(String nameBook)throws ServiceException;
+
 }

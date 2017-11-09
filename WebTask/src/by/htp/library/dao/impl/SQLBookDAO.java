@@ -21,7 +21,8 @@ public class SQLBookDAO implements BookDAO {
 	private static final String BOOK_SELECT = "SELECT * FROM BOOKS WHERE WRITER=? AND NAMEBOOK=? AND STATUS='EXIST'";
 	private static final String SELECT_BOOK_ID = "SELECT * FROM BOOKS WHERE ID=? AND STATUS='EXIST' ";
 	private static final String DELETE_BOOK_ID = "UPDATE BOOKS SET STATUS='DELETE' WHERE ID=?";
-	private static final int FIRST= 1;
+	private static final String SELECT_NAME_OF_BOOK = "SELECT * FROM BOOKS WHERE NAMEBOOK=? AND STATUS='EXIST' ";
+private static final int FIRST= 1;
 	private static final int SECOND = 2;
 	private static final int THIRD = 3;
 	private static final int FOURTH = 4;
@@ -195,24 +196,9 @@ public class SQLBookDAO implements BookDAO {
 			
 			PreparedStatement ps = con.prepareStatement(DELETE_BOOK_ID);
 			ps.setString(FIRST, id);
-			//ps.setString(SECOND, nameBook);
 			
 			ps.executeUpdate();
-			/*ps = con.prepareStatement(BOOK_SELECT);
-			ps.setString(FIRST, id);
-			//ps.setString(SECOND, nameBook);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				int Id = rs.getInt(FIRST);
-				String writer = rs.getString(SECOND);
-				String nameBook = rs.getString(THIRD);
-				String image = rs.getString(FOURTH);
-				String genre = rs.getString(FIFTH);
-				String house = rs.getString(SIXTH);
-				String year = rs.getString(SEVENTH);
-				
-				book = new Book(Id,writer, nameBook, image,genre,house,year);*/
-				System.out.println("is dao");
+			
 			
 		} catch (ConnectionPoolException e) {
 			throw new DAOException(e);
@@ -229,6 +215,53 @@ public class SQLBookDAO implements BookDAO {
 		}return book;
 	}
 
-	
+	@Override
+	public Book searchBook(String nameBook) throws DAOException {
+		Connection con = null;
+		ResultSet rs = null;
+		Book book= null;
+
+		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
+		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
+		try {
+
+			con = cp.takeConnection();
+
+			PreparedStatement ps = con.prepareStatement(SELECT_NAME_OF_BOOK);
+
+			ps.setString(FIRST, nameBook);
+			
+			
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				
+				int id = rs.getInt(FIRST);
+				String writer = rs.getString(SECOND);
+				String namebook = rs.getString(THIRD);
+				String image = rs.getString(FOURTH);
+				String genre = rs.getString(FIFTH);
+				String house = rs.getString(SIXTH);
+				String year = rs.getString(SEVENTH);
+				
+				book = new Book(id,writer, namebook, image,genre,house,year);
+			}
+			
+
+		} catch (ConnectionPoolException e) {
+			throw new DAOException(e);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+		finally{
+			try {
+				cp.removeConnection();
+			} catch (ConnectionPoolException e) {
+				// Log.ERROR
+				e.printStackTrace();
+			}
+		}
+		return book;
+	}
+
 
 }

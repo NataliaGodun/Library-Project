@@ -13,11 +13,10 @@ import by.htp.library.command.impl.EditProfilePasswordForm;
 import by.htp.library.command.impl.Exit;
 import by.htp.library.command.impl.ReadBook;
 import by.htp.library.command.impl.Registration;
+import by.htp.library.command.impl.SearchBook;
 import by.htp.library.command.impl.ShowAddNewBookForm;
 import by.htp.library.command.impl.ViewAllBooks;
-import by.htp.library.command.impl.ShowDeleteBookForm;
 import by.htp.library.command.impl.ShowEditProfileForm;
-import by.htp.library.command.impl.ShowImage;
 import by.htp.library.command.impl.ShowRegistrationForm;
 import by.htp.library.command.impl.ViewBook;
 
@@ -31,7 +30,6 @@ public class CommandProvider {
 		commands.put(CommandName.SHOWADDNEWBOOKFORM, new ShowAddNewBookForm());
 		commands.put(CommandName.ADDNEWBOOK, new AddNewBook());
 		commands.put(CommandName.VIEWBOOK, new ViewBook());
-		commands.put(CommandName.SHOWDELETEBOOKFORM, new ShowDeleteBookForm());
 		commands.put(CommandName.DELETEBOOK, new DeleteBook());
 		commands.put(CommandName.EXIT, new Exit());
 		commands.put(CommandName.VIEWALLBOOKS, new ViewAllBooks());
@@ -42,7 +40,7 @@ public class CommandProvider {
 		commands.put(CommandName.EDITPROFILEPASSWORD, new EditProfilePassword());
 		commands.put(CommandName.READBOOK, new ReadBook());
 		commands.put(CommandName.SHOWREGISTRATIONFORM, new ShowRegistrationForm());
-		commands.put(CommandName.SHOWIMAGE, new ShowImage());
+		commands.put(CommandName.SEARCHBOOK, new SearchBook());
 		
 	
 	}

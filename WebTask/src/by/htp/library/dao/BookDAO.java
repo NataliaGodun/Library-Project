@@ -14,4 +14,6 @@ Book viewBook(String id) throws DAOException;
 
 Book deleteBook(String id)throws DAOException;
 
+Book searchBook(String nameBook)throws DAOException;
+
 }

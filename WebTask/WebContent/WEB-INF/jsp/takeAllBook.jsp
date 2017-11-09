@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	import="by.htp.library.domain.Book" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -9,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>ELibrary</title>
 <link rel="stylesheet" type="text/css" 
-	href="<c:url value="/resources/css/style2.css" />"/>
+	href="<c:url value="/resources/css/style2.css"/>"/>
 </head>
 <body>
 	<fmt:setLocale value="en" />
@@ -56,6 +55,14 @@
 	</c:if>
 	<br />
 	
+			select 
+		<br />
+		<form action="Controller" method="get">
+						
+						<input type="hidden" name="command" value="searchBook" /> 
+						<input type="text" name="nameBook" value="" /> 
+						<input type="submit" value="search of the book" />
+					</form>		
 	
 	<div id="inline">
 		<div id="content">
@@ -97,16 +104,8 @@
 						<input type="submit" value="View book" />
 					</form>
 		
-					<form action="Controller" method="get">
-						<input type="hidden" name="command" value="ReadBook" />
-						 <input type="submit" value="Read book" />
-					</form>
 					
-					<form action="Controller" method="get">
-						<input type="hidden" name="command" value="viewBook" /> 
-						<input type="hidden" name="id" value=" ${List.id}" /> 
-						<input type="submit" value="Delete book" />
-					</form>
+					
 					</div>
 				</div>
 				<br />
@@ -141,10 +140,19 @@
 	</div>
 			<br />
 			<br />
-	<form action="Controller" method="get">
+			
+	<c:if test="${sessionScope.role=='admin' }">
+		<form action="Controller" method="get">
 						<input type="hidden" name="command" value="ShowAddNewBookForm" /> 
 						<input type="submit" value="Add new book" />
 					</form>
+	</c:if>	
+	
+	<form action="Controller" method="get">
+		<input type="hidden" name="command" value="exit" /> <br />
+		<input type="submit" value="Exit" />
+		</form>
+		
 	</div>
 	
 	
