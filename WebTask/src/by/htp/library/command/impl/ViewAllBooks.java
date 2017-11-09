@@ -21,7 +21,7 @@ public class ViewAllBooks implements Command {
 	private static final String TAKE_ALL_JSP = "WEB-INF/jsp/takeAllBook.jsp";
 	private static final String ERROR_MESSAGE = "errorMessage";
 	private static final String MAIN_JSP = "WEB-INF/jsp/main.jsp";
-	private static final String MESSAGE = "Message";
+	private static final String MESSAGE = "message";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,6 +33,8 @@ public class ViewAllBooks implements Command {
 			}
 	}
 
+	
+	
 	ServiceFactory factory = ServiceFactory.getInstance();
 	BookService bookService = factory.getBookService();
 
@@ -44,18 +46,17 @@ public class ViewAllBooks implements Command {
 		if (List.size() == 0) {
 
 			request.setAttribute(ERROR_MESSAGE, MESSAGE_NO_BOOKS);
-			page = MAIN_JSP;
+			page = MAIN_JSP;//takeAllBook
 		} else {
-			//String mes = request.getParameter(MESSAGE);
-			//if (!(mes == null || mes.isEmpty())) {
-				//request.setAttribute(MESSAGE, mes);
-		//	}
+			String mes = request.getParameter(MESSAGE);
+			System.out.println(mes);
+			
+				request.setAttribute(MESSAGE, mes);
+			
 			request.setAttribute(LIST, List);
 			page = TAKE_ALL_JSP;
-
 		}
-	}catch(
-	ServiceException e)
+	}catch(ServiceException e)
 	{
 		request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
 		page = MAIN_JSP;
@@ -65,6 +66,7 @@ public class ViewAllBooks implements Command {
 
 	dispatcher.forward(request,response);
 
-}
+
+	}
 
 }

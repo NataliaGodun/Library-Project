@@ -17,18 +17,14 @@ public class SearchBook implements Command {
 	private static final String BOOK = "book";
 	private static final String VIEW_JSP = "WEB-INF/jsp/viewBook.jsp";
 	private static final String MAIN_JSP = "WEB-INF/jsp/main.jsp";
-	private static final String ERROR_MESSAGE = "ErrorMessage";
-	private static final String MESSAGE = "Message";
-	private static final String MESSAGE_NO_BOOKS= " There are no available books";
+	private static final String ERROR_MESSAGE = "errorMessage";
 	private static final String MESSAGE_ABOUT_PROBLEM= "Sorry,technical problem";
+	private static final String URL_VIEW_ALL_BOOK="http://localhost:8080/WebTask/Controller?command=viewAllBooks&message= There is no such book in library!";
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nameBook;
 		
+		String nameBook=request.getParameter("nameBook");
 		
-		nameBook=request.getParameter("nameBook");
-		
-
 		ServiceFactory factory=ServiceFactory.getInstance();
 		BookService bookService=factory.getBookService();
 		
@@ -36,27 +32,29 @@ public class SearchBook implements Command {
 		String page = null;
 		try {
 			book = bookService.searchBook(nameBook);
-			
-			
-			
-			if (book!=null)	{
+			if (book==null){
+				response.sendRedirect(URL_VIEW_ALL_BOOK);
+			}else{
 				request.setAttribute(BOOK, book);
-			     page=VIEW_JSP;
-			    
-			}
-			else{
-				request.setAttribute(ERROR_MESSAGE, MESSAGE_NO_BOOKS);
-				page=MAIN_JSP;
+				page=VIEW_JSP;
+				
+				RequestDispatcher dispatcher=request.getRequestDispatcher(page);
+				
+				dispatcher.forward(request, response);
 				
 			}
+			
+			   
 		} catch (ServiceException e) {
 			request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
 			page=MAIN_JSP;
+			
+			RequestDispatcher dispatcher=request.getRequestDispatcher(page);
+			
+			dispatcher.forward(request, response);
 		}
 			
-		RequestDispatcher dispatcher=request.getRequestDispatcher(page);
 		
-			dispatcher.forward(request, response);
 			
 	}
 

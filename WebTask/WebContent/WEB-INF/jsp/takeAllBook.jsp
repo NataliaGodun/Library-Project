@@ -49,8 +49,12 @@
 		</div>
 	</div>
 	<br />	
-	<c:if test="${not empty  requestScope.Message }">
-		<c:out value="${  requestScope.Message }" />
+	<c:if test="${not empty  requestScope.errorMessage }">
+		<c:out value="${  requestScope.errorMessage }" />
+			<br />
+	</c:if>
+	<c:if test="${not empty  requestScope.message }">
+		<c:out value="${  requestScope.message }" />
 			<br />
 	</c:if>
 	<br />
