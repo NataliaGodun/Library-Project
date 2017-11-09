@@ -11,7 +11,6 @@ import by.htp.library.command.impl.EditProfileNameForm;
 import by.htp.library.command.impl.EditProfilePassword;
 import by.htp.library.command.impl.EditProfilePasswordForm;
 import by.htp.library.command.impl.Exit;
-import by.htp.library.command.impl.ReadBook;
 import by.htp.library.command.impl.Registration;
 import by.htp.library.command.impl.SearchBook;
 import by.htp.library.command.impl.ShowAddNewBookForm;
@@ -38,11 +37,9 @@ public class CommandProvider {
 		commands.put(CommandName.EDITPROFILENAME, new EditProfileName());
 		commands.put(CommandName.EDITPROFILEPASSWORDFORM, new EditProfilePasswordForm());
 		commands.put(CommandName.EDITPROFILEPASSWORD, new EditProfilePassword());
-		commands.put(CommandName.READBOOK, new ReadBook());
 		commands.put(CommandName.SHOWREGISTRATIONFORM, new ShowRegistrationForm());
 		commands.put(CommandName.SEARCHBOOK, new SearchBook());
 		
-	
 	}
 
 	public Command getCommand(String commandName) {

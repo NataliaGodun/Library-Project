@@ -24,11 +24,11 @@
 	</div>
 
 	<div id="book">
-				<div id="image">
+			<div id="image">
 				<img src="${pageContext.request. contextPath}/Controller?index=${book.image}" width="70%"/>
-				</div>
+			</div>
 				
-				<div id="information">
+			<div id="information">
 				
 				<strong>Name:</strong>
 					<c:out value=" ${requestScope.book.nameBook}" />
@@ -45,31 +45,31 @@
 					<strong>Year:</strong>
 					<c:out value="${ requestScope.book.year}"/>
 					<br />
-					</div>
-	<c:if test="${not empty  requestScope.Message }">
-			<c:out value="${  requestScope.Message }" />
-		</c:if>
-		<c:if test="${not empty  requestScope.errorMessage}">
-			<c:out value="${  requestScope.errorMessage }" />
-		</c:if>
-	
+			</div>
+				
+			<c:if test="${not empty  requestScope.Message }">
+				<c:out value="${  requestScope.Message }" />
+			</c:if>
 		
-		<form action="Controller" method="get">
-						<input type="hidden" name="command" value="ReadBook" />
-						 <input type="submit" value="Read book" />
-					</form>
+			<c:if test="${not empty  requestScope.errorMessage}">
+				<c:out value="${  requestScope.errorMessage }" />
+			</c:if>
+	
+			
 			<c:if test="${sessionScope.role=='admin' }">
 				
-	<a href="${pageContext.request.contextPath}/Controller?command=DeleteBook&id=${requestScope.book.id}" 
-	onclick="if (!(confirm('Are you sure you want to delete this book?'))) return false">DELETE</a>
-	
-	</c:if>
+				<a href="${pageContext.request.contextPath}/Controller?command=DeleteBook&id=${requestScope.book.id}" 
+				onclick="if (!(confirm('Are you sure you want to delete this book?'))) return false">DELETE</a>
+			</c:if>
+			
 	</div>
-<br />
-<br />
+	
+	<br />
+	<br />
 
 	
-<div id="footer"> All right reserved</div>
+	<div id="footer"> All right reserved</div>
+	
 </div>	
 		
 </body>

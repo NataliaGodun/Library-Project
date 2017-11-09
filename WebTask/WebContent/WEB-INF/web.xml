@@ -21,7 +21,7 @@
    
   </servlet-mapping>
   <error-page>
-    <exception-type>by.htp.library.controller.CanNotCreateSource</exception-type>
+    <exception-type>by.htp.library.controller.CanNotCreateConnectionPoolException</exception-type>
     <location>/error.jsp</location>
   </error-page>
 

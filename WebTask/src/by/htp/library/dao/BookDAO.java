@@ -10,9 +10,9 @@ ArrayList<Book> showBook () throws DAOException;
 
 Book addBook( String writer,String  nameBook,String pathImage, String genre,String house,String year ) throws DAOException;
 
-Book viewBook(String id) throws DAOException;
+Book viewBook(int id) throws DAOException;
 
-Book deleteBook(String id)throws DAOException;
+Book deleteBook(int id)throws DAOException;
 
 Book searchBook(String nameBook)throws DAOException;
 

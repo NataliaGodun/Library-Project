@@ -55,13 +55,13 @@
 	</c:if>
 	<br />
 	
-			select 
+			Select 
 		<br />
 		<form action="Controller" method="get">
 						
 						<input type="hidden" name="command" value="searchBook" /> 
 						<input type="text" name="nameBook" value="" /> 
-						<input type="submit" value="search of the book" />
+						<input type="submit" value="Search of the book" />
 					</form>		
 	
 	<div id="inline">
@@ -100,20 +100,19 @@
 				
 					<form action="Controller" method="get">
 						<input type="hidden" name="command" value="viewBook" /> 
-						<input type="hidden" name="id" value=" ${List.id}" /> 
+						<input type="hidden" name="id" value="${List.id}" /> 
 						<input type="submit" value="View book" />
 					</form>
 		
 					
 					
-					</div>
 				</div>
-				<br />
-				</c:forEach>
+			</div>
+			<br />
 			
-
+			</c:forEach>
 		
-	</div>
+		</div>
 
 	<div id="enterReg">
 		<form action="Controller" method="post">
@@ -154,7 +153,6 @@
 		</form>
 		
 	</div>
-	
 	
 	<div id="footer"> All right reserved</div>
 	

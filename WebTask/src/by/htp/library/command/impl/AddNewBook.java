@@ -46,7 +46,7 @@ public class AddNewBook implements Command {
 		 File uploadetFile = null;
 	
 		 String pathImage;
-		 String nameImage;
+		// String nameImage;
 	
 		//выбираем файлу имя пока не найдём свободное
 		 do{
@@ -75,9 +75,7 @@ public class AddNewBook implements Command {
 		       
 		        
 		        
-		        System.out.println(pathImage);
-				
-				 System.out.println( "pered fabricoi");
+		       
 				ServiceFactory factory=ServiceFactory.getInstance();
 				BookService bookService=factory.getBookService();
 				

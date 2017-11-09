@@ -8,11 +8,10 @@
         <title>File Upload</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style2.css" />"/>
-    </head>
-    <body>
+</head>
+<body>
   
-    
-<div id="main">
+ <div id="main">
 	
 	<div id="wrapper">
 		<div id="header">
@@ -22,13 +21,11 @@
 			</h1>
 		</div>	
 	</div>
+	
 	<br />
 	<br />
     
-    
-        <form action="Controller" method="post" enctype="multipart/form-data">
-        
-		
+    <form action="Controller" method="post" enctype="multipart/form-data">
             writer:
             <input type="text" value="" name="writer"/> <br/>
             name book:
@@ -45,7 +42,8 @@
             <input type="file" name="file" id="file" /> <br/>
             <input type="submit" value="Upload" name="upload" id="upload" />
 	</form>
+	
 	<div id="footer"> All right reserved</div>
 </div>	
-    </body>
-    </html>
+</body>
+</html>

@@ -134,7 +134,7 @@ private static final int FIRST= 1;
 	}
 
 	@Override
-	public Book viewBook(String id) throws DAOException {
+	public Book viewBook(int id) throws DAOException {
 		
 		Connection con = null;
 		ResultSet rs = null;
@@ -148,8 +148,7 @@ private static final int FIRST= 1;
 
 			PreparedStatement ps = con.prepareStatement(SELECT_BOOK_ID);
 
-			ps.setString(FIRST, id);
-			
+			ps.setInt(FIRST, id);
 			
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -183,7 +182,7 @@ private static final int FIRST= 1;
 	}
 
 	@Override
-	public Book deleteBook(String  id) throws DAOException {
+	public Book deleteBook(int  id) throws DAOException {
 		Connection con = null;
 		ResultSet rs = null;
 		Book book= null;
@@ -195,7 +194,7 @@ private static final int FIRST= 1;
 			con = cp.takeConnection();
 			
 			PreparedStatement ps = con.prepareStatement(DELETE_BOOK_ID);
-			ps.setString(FIRST, id);
+			ps.setInt(FIRST, id);
 			
 			ps.executeUpdate();
 			

@@ -12,7 +12,7 @@ import by.htp.library.service.exception.ServiceException;
 import by.htp.library.service.factory.ServiceFactory;
 
 public class DeleteBook implements Command {
-	
+	private static final String ID ="id";
 	private static final String ERROR_MESSAGE = "errorMessage";
 	private static final String MESSAGE_FAIL_DELETE = "The book is not delete!";
 	private static final String MESSAGE_SUCCESSFUL_DELETE = "&Message=Book successful delete!";
@@ -21,7 +21,10 @@ public class DeleteBook implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String id =request.getParameter("id");
+		String idBook=request.getParameter(ID);
+		 
+		int id=Integer.parseInt(idBook);
+		
 		
 		ServiceFactory factory=ServiceFactory.getInstance();
 		BookService bookService=factory.getBookService();

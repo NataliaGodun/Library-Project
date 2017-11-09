@@ -34,13 +34,14 @@ public class Controller extends HttpServlet {
 		public void init(ServletConfig config) throws ServletException {
 			
 			super.init(config);
-			ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
-			ConnectionPool cp =ObjectCPFactory.getConnectionPool();
+			ConnectionPoolFactory objectCPFactory = ConnectionPoolFactory.getInstance();
+			ConnectionPool cp =objectCPFactory.getConnectionPool();
 			
 				try {
 					cp.initPoolData();
 				} catch (ConnectionPoolException e) {
-					throw new CanNotCreateSource(e);
+						throw new CanNotCreateConnectionPoolException(e);
+					
 				}
 		}
 		
@@ -98,8 +99,8 @@ public class Controller extends HttpServlet {
 		 
 		public void destroy(){
 			super.destroy();
-			ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
-			ConnectionPool cp =ObjectCPFactory.getConnectionPool();
+			ConnectionPoolFactory objectCPFactory = ConnectionPoolFactory.getInstance();
+			ConnectionPool cp =objectCPFactory.getConnectionPool();
 			cp.dispose();
 		}	
 	

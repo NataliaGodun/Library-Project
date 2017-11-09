@@ -48,8 +48,8 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public Book viewBook(String id) throws ServiceException {
-		if (id==null||id.isEmpty()){
+	public Book viewBook(int id) throws ServiceException {
+		if (id<0){
 			throw new ServiceException(MESSAGE_WRONG_ID );	
 		}
 			DAOFactory daoObjectFactory=DAOFactory.getInstance();
@@ -62,8 +62,8 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public Book deleteBook(String id) throws ServiceException {
-		if (id==null||id.isEmpty()){
+	public Book deleteBook(int id) throws ServiceException {
+		if (id<0){
 			throw new ServiceException( MESSAGE_WRONG_NAME  );
 		}
 		
