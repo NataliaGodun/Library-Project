@@ -25,7 +25,8 @@ public class ViewAllBooks implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("loc") != null) {
+	
+	if (request.getParameter("loc") != null) {
 			if (request.getParameter("loc").equals("ru")) {
 
 				request.setAttribute("locale", "ru");
@@ -45,10 +46,10 @@ public class ViewAllBooks implements Command {
 			request.setAttribute(ERROR_MESSAGE, MESSAGE_NO_BOOKS);
 			page = MAIN_JSP;
 		} else {
-			String mes = request.getParameter(MESSAGE);
-			if (!(mes == null || mes.isEmpty())) {
-				request.setAttribute(MESSAGE, mes);
-			}
+			//String mes = request.getParameter(MESSAGE);
+			//if (!(mes == null || mes.isEmpty())) {
+				//request.setAttribute(MESSAGE, mes);
+		//	}
 			request.setAttribute(LIST, List);
 			page = TAKE_ALL_JSP;
 

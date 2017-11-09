@@ -8,7 +8,7 @@ import by.htp.library.domain.Book;
 public interface BookDAO {
 ArrayList<Book> showBook () throws DAOException;
 
-Book addBook( String writer,String  nameBook,String pathImage, String genre,String house,String year ) throws DAOException;
+Book addBook( Book book ) throws DAOException;
 
 Book viewBook(int id) throws DAOException;
 

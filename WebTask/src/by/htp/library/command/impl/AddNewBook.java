@@ -80,9 +80,9 @@ public class AddNewBook implements Command {
 				ServiceFactory factory=ServiceFactory.getInstance();
 				BookService bookService=factory.getBookService();
 				
-				Book book = null;				
+				Book book = new Book (0, Writer,nameBook,pathImage,genre,house,year);				
 				
-				book = bookService.addBook( Writer,nameBook,pathImage,genre,house,year);
+				book = bookService.addBook( book);
 					
 				int i=book.getId();
 				String url=URL_VIEW_BOOK+i;

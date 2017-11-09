@@ -22,7 +22,7 @@ public class SQLBookDAO implements BookDAO {
 	private static final String SELECT_BOOK_ID = "SELECT * FROM BOOKS WHERE ID=? AND STATUS='EXIST' ";
 	private static final String DELETE_BOOK_ID = "UPDATE BOOKS SET STATUS='DELETE' WHERE ID=?";
 	private static final String SELECT_NAME_OF_BOOK = "SELECT * FROM BOOKS WHERE NAMEBOOK=? AND STATUS='EXIST' ";
-private static final int FIRST= 1;
+	private static final int FIRST= 1;
 	private static final int SECOND = 2;
 	private static final int THIRD = 3;
 	private static final int FOURTH = 4;
@@ -78,11 +78,11 @@ private static final int FIRST= 1;
 	}
 
 	@Override
-	public Book addBook( String writer,String  nameBook,String pathImage, String genre,String house,String year ) throws DAOException {
+	public Book addBook( Book book) throws DAOException {
 		
 		Connection con = null;
 		ResultSet rs = null;
-		Book book= null;
+		//Book book= null;
 		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
 		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
 	
@@ -91,18 +91,18 @@ private static final int FIRST= 1;
 			
 			PreparedStatement ps = con.prepareStatement(ADD_BOOK);
 	
-			ps.setString(FIRST, writer);
-			ps.setString(SECOND,  nameBook);
-			ps.setString(THIRD,pathImage);
-			ps.setString(FOURTH,genre);
-			ps.setString(FIFTH,house);
-			ps.setString(SIXTH,year);
+			ps.setString(FIRST, book.getWriter());
+			ps.setString(SECOND,  book.getNameBook());
+			ps.setString(THIRD,book.getImage());
+			ps.setString(FOURTH,book.getGenre());
+			ps.setString(FIFTH,book.getHouse());
+			ps.setString(SIXTH,book.getYear());
 	
 			ps.executeUpdate();
 
 			ps = con.prepareStatement(BOOK_SELECT);
-			ps.setString(FIRST, writer);
-			ps.setString(SECOND, nameBook );
+			ps.setString(FIRST, book.getWriter());
+			ps.setString(SECOND, book.getNameBook() );
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt(FIRST);

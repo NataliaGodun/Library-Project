@@ -30,18 +30,18 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public Book addBook( String Writer,String  nameBook,String pathImage, String genre,String house,String year  ) throws ServiceException {
-		if (nameBook==null||nameBook.isEmpty()){
+	public Book addBook( Book book ) throws ServiceException {
+		if (book.getNameBook()==null){
 			throw new ServiceException( MESSAGE_WRONG_NAME  );
 		}
-		if (Writer==null||Writer.isEmpty()){
+		if (book.getWriter()==null){
 			throw new ServiceException( MESSAGE_WRONG_WRITER );
 		}
 		
 		DAOFactory daoObjectFactory=DAOFactory.getInstance();
 		BookDAO bookDAO=daoObjectFactory.getBookDAO();
 		try {
-			return bookDAO.addBook(Writer,nameBook,pathImage,genre,house,year);
+			return bookDAO.addBook(book);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}	
