@@ -25,7 +25,7 @@
 	<br />
 	<br />
     
-    <form action="Controller" method="post" enctype="multipart/form-data">
+    <form action="ImageController" method="post" enctype="multipart/form-data">
             writer:
             <input type="text" value="" name="writer"/> <br/>
             name book:

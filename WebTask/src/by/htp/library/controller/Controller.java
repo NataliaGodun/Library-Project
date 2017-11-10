@@ -23,7 +23,7 @@ public class Controller extends HttpServlet {
 	   private static final long serialVersionUID = -1852427791495732042L;
 	
 	   private static final CommandProvider PROVIDER=new CommandProvider();  
-	   private static final String COMMAND="command";  
+	   private static final String REQUEST_PARAMETR="command";  
 		
 	 
 	    public Controller() {
@@ -40,7 +40,7 @@ public class Controller extends HttpServlet {
 				try {
 					cp.initPoolData();
 				} catch (ConnectionPoolException e) {
-						throw new CanNotCreateConnectionPoolException(e);
+						throw new CreatingConnectionPoolException(e);
 					
 				}
 		}
@@ -55,18 +55,17 @@ public class Controller extends HttpServlet {
 		protected void doGet(HttpServletRequest request,
 	            HttpServletResponse response) throws ServletException, IOException {
 			
-			String commandName = null;
-			if(request.getParameter("command") != null){
-				commandName = request.getParameter("command");
-				System.out.println(commandName);
+			//String commandName = null;
+		//	if(request.getParameter(REQUEST_PARAMETR) != null){
+				String commandName = request.getParameter(REQUEST_PARAMETR);
 				Command command = PROVIDER.getCommand(commandName);
 				command.execute(request, response);	
-			}else{
-			processRequest(request,response);
-			}
+			//}else{
+			//processRequest(request,response);
+			//}
 		}
 
-
+/*
 		private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 			String i=request.getParameter("index");
@@ -80,20 +79,20 @@ public class Controller extends HttpServlet {
 			}finally{
 			outputStream.close();
 			}
-		}
+		}*/
 		
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-			if (!isMultipart) {
-				String commandName=request.getParameter(COMMAND);
+			//boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+			//if (!isMultipart) {
+				String commandName=request.getParameter(REQUEST_PARAMETR);
 				Command command=PROVIDER.getCommand(commandName);
 				command.execute(request, response);
-			}
+		/*	}
 			else{
 				Command command=PROVIDER.getCommand("AddNewBook");
 				command.execute(request, response);
-			}
+			}*/
 		}
 		
 		 

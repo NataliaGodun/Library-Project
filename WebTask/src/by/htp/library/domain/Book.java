@@ -1,6 +1,11 @@
 package by.htp.library.domain;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable{
+
+	private static final long serialVersionUID = 2661300046083956194L;
+	
 	private int id;
 	private String writer;
 	private String nameBook;
@@ -140,4 +145,7 @@ public class Book {
 		return true;
 	}
 	
+	public String toString() { 
+	    return "Id: " + this.id+ ", writer: '" + this.writer + ", name book: " + this.nameBook + ", genre: "+this.genre+", publishing house: "+this.house+", year: "+this.year;
+	} 
 }

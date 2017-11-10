@@ -2,8 +2,6 @@ package by.htp.library.command.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +30,6 @@ public class ViewAllBooks implements Command {
 				request.setAttribute("locale", "ru");
 			}
 	}
-
-	
 	
 	ServiceFactory factory = ServiceFactory.getInstance();
 	BookService bookService = factory.getBookService();
@@ -51,7 +47,7 @@ public class ViewAllBooks implements Command {
 			String mes = request.getParameter(MESSAGE);
 			System.out.println(mes);
 			
-				request.setAttribute(MESSAGE, mes);
+			request.setAttribute(MESSAGE, mes);
 			
 			request.setAttribute(LIST, List);
 			page = TAKE_ALL_JSP;

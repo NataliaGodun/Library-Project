@@ -25,7 +25,7 @@
 
 	<div id="book">
 			<div id="image">
-				<img src="${pageContext.request. contextPath}/Controller?index=${book.image}" width="70%"/>
+				<img src="${pageContext.request. contextPath}/ImageController?index=${book.image}" width="70%"/>
 			</div>
 				
 			<div id="information">

@@ -15,6 +15,7 @@ import by.htp.library.service.factory.ServiceFactory;
 
 public class SearchBook implements Command {
 	private static final String BOOK = "book";
+	private static final String NAME_BOOK = "nameBook";
 	private static final String VIEW_JSP = "WEB-INF/jsp/viewBook.jsp";
 	private static final String MAIN_JSP = "WEB-INF/jsp/main.jsp";
 	private static final String ERROR_MESSAGE = "errorMessage";
@@ -23,7 +24,7 @@ public class SearchBook implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String nameBook=request.getParameter("nameBook");
+		String nameBook=request.getParameter( NAME_BOOK);
 		
 		ServiceFactory factory=ServiceFactory.getInstance();
 		BookService bookService=factory.getBookService();
@@ -43,7 +44,6 @@ public class SearchBook implements Command {
 				dispatcher.forward(request, response);
 				
 			}
-			
 			   
 		} catch (ServiceException e) {
 			request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
@@ -53,9 +53,7 @@ public class SearchBook implements Command {
 			
 			dispatcher.forward(request, response);
 		}
-			
-		
-			
+					
 	}
 
 }
