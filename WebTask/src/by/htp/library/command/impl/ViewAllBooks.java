@@ -45,7 +45,6 @@ public class ViewAllBooks implements Command {
 			page = MAIN_JSP;//takeAllBook
 		} else {
 			String mes = request.getParameter(MESSAGE);
-			System.out.println(mes);
 			
 			request.setAttribute(MESSAGE, mes);
 			

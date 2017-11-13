@@ -80,7 +80,7 @@
 			<div id="book">
 				<div id="image">
 					<c:if test="${not empty  List.image}">
-						  <img src="${pageContext.request. contextPath}/ImageController?index=${List.image}" width="70%"/>
+						  <img src="${pageContext.request. contextPath}/ImageController?command=GetImage&index=${List.image}" width="70%"/>
 					</c:if>
 				</div>
 					

@@ -15,7 +15,7 @@ public class DeleteBook implements Command {
 	private static final String ID ="id";
 	private static final String ERROR_MESSAGE = "errorMessage";
 	private static final String MESSAGE_FAIL_DELETE = "The book is not delete!";
-	private static final String MESSAGE_SUCCESSFUL_DELETE = "&Message=Book successful delete!";
+	private static final String MESSAGE_SUCCESSFUL_DELETE = "&message=Book successful delete!";
 	private static final String URL_VIEW_ALL_BOOK=" http://localhost:8080/WebTask/Controller?command=viewAllBooks";
 	private static final String VIEW_JSP = "WEB-INF/jsp/viewBook.jsp";
 	@Override

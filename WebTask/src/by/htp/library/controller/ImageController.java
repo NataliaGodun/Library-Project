@@ -16,6 +16,9 @@ import by.htp.library.command.Command;
 public class ImageController extends HttpServlet {
 
 	private static final long serialVersionUID = 7764697338154809933L;
+	
+	private static final String REQUEST_PARAMETR="command"; 
+	private static final String ADD_NEW_BOOK="AddNewBook";
 	private static final CommandProvider PROVIDER=new CommandProvider();  
 	
 	
@@ -33,14 +36,15 @@ public class ImageController extends HttpServlet {
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Command command=PROVIDER.getCommand("GetImage");
-		command.execute(request, response);
+		String commandName = request.getParameter(REQUEST_PARAMETR);
+		Command command = PROVIDER.getCommand(commandName);
+		command.execute(request, response);	
 	}
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Command command=PROVIDER.getCommand("AddNewBook");
+		Command command=PROVIDER.getCommand(ADD_NEW_BOOK);
 		command.execute(request, response);
 	}
 	
