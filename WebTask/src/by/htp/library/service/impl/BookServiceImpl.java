@@ -38,6 +38,7 @@ public class BookServiceImpl implements BookService {
 			throw new ServiceException( MESSAGE_WRONG_WRITER );
 		}
 		
+		//ValidationBook.validateBook(book);
 		DAOFactory daoObjectFactory=DAOFactory.getInstance();
 		BookDAO bookDAO=daoObjectFactory.getBookDAO();
 		try {

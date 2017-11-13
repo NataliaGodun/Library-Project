@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.Random;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -32,9 +31,8 @@ public class AddNewBook implements Command {
 	private static final String URL_VIEW_BOOK="http://localhost:8080/WebTask/Controller?command=viewBook&id=";
 	private static final String MAIN_JSP = "WEB-INF/jsp/main.jsp";
 	private static final String PATH_IMAGE = "C:/Users/Dima/git/Library-Project/WebTask/WebContent/resources/images/";
-	private static final String JPG= ".jpg";
+
 	
-	private Random random = new Random();
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,18 +44,16 @@ public class AddNewBook implements Command {
 		 final String house=request.getParameter(HOUSE);
 		 final String year =request.getParameter(YEAR);
 		 final Part filePart=request.getPart(FILE);
+		 final String fileName= getFileName(filePart);
 		   
-		 File uploadetFile = null;
-	
-		 String pathImage;
 		 String page = null;
-	
-		//we choose to the file a name we won't find free yet
-		 do{
-			 pathImage = (PATH_IMAGE + random.nextInt(1000)+JPG);	
-				uploadetFile = new File(pathImage);		
-			}while(uploadetFile.exists());
-		
+		 File uploadetFile = null;
+		 
+		 String pathImage;
+		 
+		 pathImage = (PATH_IMAGE + fileName);	
+		 uploadetFile = new File(pathImage);		
+		 System.out.println(pathImage);
 			//create file
 		 uploadetFile.createNewFile(); 
 		 
@@ -89,14 +85,13 @@ public class AddNewBook implements Command {
 				
 				response.sendRedirect(url);
 						
-				} catch (ServiceException e) {
+			} catch (ServiceException e) {
 					request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
 					page=MAIN_JSP;
 					RequestDispatcher dispatcher=request.getRequestDispatcher(page);
 					dispatcher.forward(request, response);
-					}	
-						        
-		    finally {
+					
+			}	finally {
 		        if (out != null) {
 		            out.close();
 		        }
@@ -107,6 +102,18 @@ public class AddNewBook implements Command {
 		            writer.close();
 		        }
 		   }
+	}
+
+	private String getFileName(final Part part) {
+	    final String partHeader = part.getHeader("content-disposition");
+	 //   LOGGER.log(Level.INFO, "Part Header = {0}", partHeader);
+	    for (String content : part.getHeader("content-disposition").split(";")) {
+	        if (content.trim().startsWith("filename")) {
+	             content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
+	            return content.substring(content.lastIndexOf('\\') + 1,content.lastIndexOf('"'));
+	        }
+	    }
+	    return null;
 	}
 }
 	

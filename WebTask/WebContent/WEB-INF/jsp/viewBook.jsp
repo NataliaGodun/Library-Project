@@ -62,6 +62,14 @@
 				onclick="if (!(confirm('Are you sure you want to delete this book?'))) return false">DELETE</a>
 			</c:if>
 			
+			
+			
+			<form action="Controller" method="get">
+						
+						<input type="hidden" name="command" value="viewAllBooks" /> 
+						<input type="hidden" name="loc" value="${requestScope.locale}">
+						<input type="submit" value="View all books" />
+					</form>	
 	</div>
 	
 	<br />

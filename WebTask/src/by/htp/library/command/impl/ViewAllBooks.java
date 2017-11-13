@@ -24,12 +24,6 @@ public class ViewAllBooks implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-	if (request.getParameter("loc") != null) {
-			if (request.getParameter("loc").equals("ru")) {
-
-				request.setAttribute("locale", "ru");
-			}
-	}
 	
 	ServiceFactory factory = ServiceFactory.getInstance();
 	BookService bookService = factory.getBookService();

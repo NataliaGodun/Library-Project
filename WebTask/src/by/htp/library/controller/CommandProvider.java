@@ -12,6 +12,8 @@ import by.htp.library.command.impl.EditProfilePassword;
 import by.htp.library.command.impl.EditProfilePasswordForm;
 import by.htp.library.command.impl.Exit;
 import by.htp.library.command.impl.GetImage;
+import by.htp.library.command.impl.LocaleEn;
+import by.htp.library.command.impl.LocaleRu;
 import by.htp.library.command.impl.Registration;
 import by.htp.library.command.impl.SearchBook;
 import by.htp.library.command.impl.ShowAddNewBookForm;
@@ -41,6 +43,8 @@ public class CommandProvider {
 		commands.put(CommandName.SHOWREGISTRATIONFORM, new ShowRegistrationForm());
 		commands.put(CommandName.SEARCHBOOK, new SearchBook());
 		commands.put(CommandName.GETIMAGE, new GetImage());
+		commands.put(CommandName.LOCALERU, new LocaleRu());
+		commands.put(CommandName.LOCALEEN, new LocaleEn());	
 		
 	}
 

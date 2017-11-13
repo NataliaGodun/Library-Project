@@ -17,12 +17,7 @@ public class ShowRegistrationForm implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (request.getParameter("loc") != null) {
-			if (request.getParameter("loc").equals("ru")) {
-
-				request.setAttribute("locale", "ru");
-			}
-	}
+		
 			
 			RequestDispatcher dispatcher=request.getRequestDispatcher(REGISTRATION_FORM_JSP);
 			dispatcher.forward(request, response);

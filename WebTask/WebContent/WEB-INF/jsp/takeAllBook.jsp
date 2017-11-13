@@ -11,11 +11,8 @@
 	href="<c:url value="/resources/css/style2.css"/>"/>
 </head>
 <body>
-	<fmt:setLocale value="en" />
-			<c:if test="${ not empty  requestScope.locale}">
-				<c:set var="language" value="${requestScope.locale}" scope="session" />
-				<fmt:setLocale value="${language}" />
-			</c:if>
+	
+	
 	<fmt:setBundle basename="resources.pagecontent" scope="session" />
 	
 	
@@ -35,15 +32,13 @@
 	<div id="language">
 		<div id="languageRu">
 			<form action="Controller" method="get">
-				<input type="hidden" name="command" value="VIEWALLBOOKS" /> 
-				<input type="hidden" name="loc" value="ru" /> 
+				<input type="hidden" name="command" value="LOCALERU" /> 
 				<input type="submit" value="Russian" />
 			</form>
 		</div>
-		<div id="languageRu">
+		<div id="languageEn">
 			<form action="Controller" method="get">
-				<input type="hidden" name="command" value="VIEWALLBOOKS" />
-				 <input type="hidden" name="loc" value="en" /> 
+				<input type="hidden" name="command" value="LOCALEEN" />
 			 	<input type="submit" value="English" />
 			</form>
 		</div>
@@ -137,7 +132,6 @@
 		
 		<form action="Controller" method="get">
 			<input type="hidden" name="command" value="SHOWREGISTRATIONFORM" /> 
-			<input type="hidden" name="loc" value="${requestScope.locale}">
 			<input type="submit" value="Registration" />
 		</form>
 	</div>
