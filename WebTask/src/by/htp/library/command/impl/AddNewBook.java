@@ -25,11 +25,11 @@ public class AddNewBook implements Command {
 	private static final String YEAR= "year";
 	private static final String FILE= "file";
 	private static final String ERROR_MESSAGE = "errorMessage";
-	private static final String MESSAGE_ABOUT_PROBLEM = "Sorry,technical problem";
+	private static final String MESSAGE_ABOUT_PROBLEM = "Please, fill a form once again.";
 	private static final String CONTENT_TYPE_TEXT_HTML= "text/html;charset=UTF-8";
 	//private static final String MESSAGE_SUCCESSFUL_ADDITION = "&Message=Book successful addition in library!";
 	private static final String URL_VIEW_BOOK="http://localhost:8080/WebTask/Controller?command=viewBook&id=";
-	private static final String MAIN_JSP = "WEB-INF/jsp/main.jsp";
+	private static final String ADD_NEW_BOOK_JSP = "WEB-INF/jsp/addNewBook.jsp";
 	private static final String PATH_IMAGE = "C:/Users/Dima/git/Library-Project/WebTask/WebContent/resources/images/";
 
 	
@@ -87,7 +87,7 @@ public class AddNewBook implements Command {
 						
 			} catch (ServiceException e) {
 					request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
-					page=MAIN_JSP;
+					page=ADD_NEW_BOOK_JSP;
 					RequestDispatcher dispatcher=request.getRequestDispatcher(page);
 					dispatcher.forward(request, response);
 					
@@ -109,12 +109,13 @@ public class AddNewBook implements Command {
 	 //   LOGGER.log(Level.INFO, "Part Header = {0}", partHeader);
 	    for (String content : part.getHeader("content-disposition").split(";")) {
 	        if (content.trim().startsWith("filename")) {
-	             content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
-	            return content.substring(content.lastIndexOf('\\') + 1,content.lastIndexOf('"'));
+	            return content.substring(
+	              content.indexOf('=') + 1).trim().replace("\"", "").replace("\\", "").replaceAll(":", "");
 	        }
 	    }
 	    return null;
 	}
+
 }
 	
 	

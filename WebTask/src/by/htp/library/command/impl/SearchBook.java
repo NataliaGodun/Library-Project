@@ -17,9 +17,6 @@ public class SearchBook implements Command {
 	private static final String BOOK = "book";
 	private static final String NAME_BOOK = "nameBook";
 	private static final String VIEW_JSP = "WEB-INF/jsp/viewBook.jsp";
-	private static final String MAIN_JSP = "WEB-INF/jsp/main.jsp";
-	private static final String ERROR_MESSAGE = "errorMessage";
-	private static final String MESSAGE_ABOUT_PROBLEM= "Sorry,technical problem";
 	private static final String URL_VIEW_ALL_BOOK="http://localhost:8080/WebTask/Controller?command=viewAllBooks&message= There is no such book in library!";
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,9 +30,8 @@ public class SearchBook implements Command {
 		String page = null;
 		try {
 			book = bookService.searchBook(nameBook);
-			if (book==null){
-				response.sendRedirect(URL_VIEW_ALL_BOOK);
-			}else{
+			if (!(book==null)){
+				
 				request.setAttribute(BOOK, book);
 				page=VIEW_JSP;
 				
@@ -46,14 +42,10 @@ public class SearchBook implements Command {
 			}
 			   
 		} catch (ServiceException e) {
-			request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
-			page=MAIN_JSP;
 			
-			RequestDispatcher dispatcher=request.getRequestDispatcher(page);
-			
-			dispatcher.forward(request, response);
+			//log
 		}
-					
+		response.sendRedirect(URL_VIEW_ALL_BOOK);			
 	}
 
 }

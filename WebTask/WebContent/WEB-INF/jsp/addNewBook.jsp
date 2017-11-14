@@ -24,7 +24,10 @@
 	
 	<br />
 	<br />
-    
+    <c:if test="${not empty requestScope.errorMessage }">
+		<br />
+		<c:out value="${requestScope.errorMessage }"/>
+	</c:if>
     <form action="ImageController" method="post" enctype="multipart/form-data">
             writer:
             <input type="text" value="" name="writer"/> <br/>
