@@ -43,25 +43,26 @@
 			</form>
 		</div>
 	</div>
+	
 	<br />	
 	<c:if test="${not empty  requestScope.errorMessage }">
 		<c:out value="${  requestScope.errorMessage }" />
 			<br />
 	</c:if>
-	<c:if test="${not empty  requestScope.message }">
-		<c:out value="${  requestScope.message }" />
+	<c:if test="${not empty  requestScope.messageInfo }">
+		<c:out value="${  requestScope.messageInfo }" />
 			<br />
 	</c:if>
-	<br />
 	
-			Select 
-		<br />
-		<form action="Controller" method="get">
+	
+	Select 
+	<br />
+	<form action="Controller" method="get">
 						
-						<input type="hidden" name="command" value="searchBook" /> 
-						<input type="text" name="nameBook" value="" /> 
-						<input type="submit" value="Search of the book" />
-					</form>		
+			<input type="hidden" name="command" value="searchBook" /> 
+			<input type="text" name="nameBook" value="" /> 
+			<input type="submit" value="Search of the book" />
+	</form>		
 	
 	<div id="inline">
 		<div id="content">
@@ -122,8 +123,8 @@
 			<br /> <input type="password" name="password" value="" /><br /> 
 			<input type="submit" value="sign in" /> <br />
 			
-			<c:if test="${not empty  requestScope.errorMessage }">
-				<c:out value="${  requestScope.errorMessage }" />
+			<c:if test="${not empty  requestScope.message }">
+				<c:out value="${  requestScope.message}" />
 			</c:if>
 		</form>
 				

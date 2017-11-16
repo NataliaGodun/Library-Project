@@ -6,6 +6,10 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp.library.command.Command;
 import by.htp.library.service.BookService;
 import by.htp.library.service.exception.ServiceException;
@@ -15,9 +19,12 @@ public class DeleteBook implements Command {
 	private static final String ID ="id";
 	private static final String ERROR_MESSAGE = "errorMessage";
 	private static final String MESSAGE_FAIL_DELETE = "The book is not delete!";
-	private static final String MESSAGE_SUCCESSFUL_DELETE = "&message=Book successful delete!";
+	private static final String MESSAGE_SUCCESSFUL_DELETE = "&messageInfo=Book successful delete!";
 	private static final String URL_VIEW_ALL_BOOK=" http://localhost:8080/WebTask/Controller?command=viewAllBooks";
 	private static final String VIEW_JSP = "WEB-INF/jsp/viewBook.jsp";
+	private static final String MESSAGE_LOGGER_INFO ="Delete book has occurred an exception";
+	
+    private static final Logger LOGGER = LogManager.getRootLogger();
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -37,8 +44,11 @@ public class DeleteBook implements Command {
 			    response.sendRedirect(url2);
 		
 		} catch (ServiceException e) {
+			LOGGER.info(MESSAGE_LOGGER_INFO);
+			
 			request.setAttribute(ERROR_MESSAGE, MESSAGE_FAIL_DELETE);
 			page=VIEW_JSP;
+			
 			RequestDispatcher dispatcher=request.getRequestDispatcher(page);
 			dispatcher.forward(request, response);
 		}		

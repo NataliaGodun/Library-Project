@@ -23,6 +23,18 @@
 		</div>	
 	</div>
 
+	<br />
+	<br />
+	
+	<c:if test="${not empty  requestScope.errorMessage }">
+		<c:out value="${  requestScope.errorMessage }" />
+			<br />
+	</c:if>
+	<c:if test="${not empty  requestScope.message }">
+		<c:out value="${  requestScope.message }" />
+			<br />
+	</c:if>
+	
 	<div id="book">
 			<div id="image">
 				<img src="${pageContext.request.contextPath}/ImageController?command=GetImage&index=${book.image}" width="70%"/>

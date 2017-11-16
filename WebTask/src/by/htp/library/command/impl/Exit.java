@@ -11,6 +11,7 @@ import by.htp.library.command.Command;
 
 public class Exit implements Command {
 	private static final String INDEX_JSP ="index.jsp";
+	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

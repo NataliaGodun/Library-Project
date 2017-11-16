@@ -11,14 +11,21 @@ public class ValidationBook {
 	private static final String MESSAGE_WRONG_YEAR= "Incorrect year published";
 	private static final String MESSAGE_WRONG_PATH_IMAGE= "Incorrect path image";
 	private static final String MESSAGE_WRONG_ID= "This book is not available";
+	private static final String MESSAGE_WRONG_GENRE= "Incorect genre";
 	
 	public static void validateBook(Book book) throws ServiceException{
+	
 		if (book.getNameBook()==null||book.getNameBook().isEmpty()){
 			throw new ServiceException( MESSAGE_WRONG_NAME  );
 		}
 		if (book.getWriter()==null||book.getWriter().isEmpty()){
 			throw new ServiceException( MESSAGE_WRONG_WRITER );
 		}
+		if (book.getGenre()==null||book.getGenre().isEmpty()){
+	
+			throw new ServiceException(MESSAGE_WRONG_GENRE );
+		}
+		
 		if (book.getHouse()==null||book.getHouse().isEmpty()){
 			throw new ServiceException( MESSAGE_WRONG_HOUSE );
 		}

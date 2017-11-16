@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp.library.command.Command;
 import by.htp.library.domain.User;
 
@@ -27,7 +30,11 @@ public class Registration implements Command {
 	private static final String NAME_USER = "name";
 	private static final String ROLE= "role";
 	private static final String NAME_USERS= "name";
+	private static final String URL_VIEW_ALL_BOOK_WITH_INFO="http://localhost:8080/WebTask/Controller?command=VIEWALLBOOKS&message=The user with such login already exists";
+	private static final String URL_VIEW_ALL_BOOK_WITH_ERROR="http://localhost:8080/WebTask/Controller?command=VIEWALLBOOKS&errorMessage=Sorry,technical problem";
+	private static final String MESSAGE_LOGGER_INFO="Wrong registration ";
 	
+	private static final Logger LOGGER = LogManager.getRootLogger();
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,20 +61,20 @@ public class Registration implements Command {
 				request.setAttribute(USER , user);
 						
 				page=MAIN_JSP;
-			}else{
-				request.setAttribute(ERROR_MESSAGE, MESSAGE_LOGIN_EXISTS);
-				page=INDEX_JSP;
+				RequestDispatcher dispatcher=request.getRequestDispatcher(page);
+				
+				dispatcher.forward(request, response);
 						
+			}else{
+				response.sendRedirect(URL_VIEW_ALL_BOOK_WITH_INFO);
 			}
 		} catch (ServiceException e) {
-			request.setAttribute( ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
-			page=INDEX_JSP;
+			
+			LOGGER.info(MESSAGE_LOGGER_INFO);
+			
+			response.sendRedirect(URL_VIEW_ALL_BOOK_WITH_ERROR);
 		}
 						
-		RequestDispatcher dispatcher=request.getRequestDispatcher(page);
-				
-			dispatcher.forward(request, response);
-					
 	}
 
 }

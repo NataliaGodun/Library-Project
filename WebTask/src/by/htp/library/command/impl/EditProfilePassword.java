@@ -6,6 +6,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp.library.command.Command;
 import by.htp.library.domain.User;
 import by.htp.library.service.UserService;
@@ -23,13 +27,16 @@ public class EditProfilePassword implements Command {
 	private static final String MAIN_JSP = "WEB-INF/jsp/main.jsp";
 	private static final String EDIT_PROFILE_JSP = "WEB-INF/jsp/EditProfile.jsp";
 	private static final String PASSWORD = "password";
+	private static final String MESSAGE_LOGGER_INFO = "The exception has occurred at editing profile password";
+	
+	private static final Logger LOGGER = LogManager.getRootLogger();
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String password=request.getParameter(PASSWORD);
 	
-		HttpSession session=request.getSession(true);//use true?
+		HttpSession session=request.getSession(true);
 		String login=(String) session.getAttribute(LOGIN);
 		
 		ServiceFactory factory=ServiceFactory.getInstance();
@@ -50,6 +57,9 @@ public class EditProfilePassword implements Command {
 				
 			}
 		} catch (ServiceException e) {
+			
+			LOGGER.info(MESSAGE_LOGGER_INFO );
+			
 			request.setAttribute( ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
 			page=MAIN_JSP;
 		}

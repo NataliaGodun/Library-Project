@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp.library.command.Command;
 import by.htp.library.domain.User;
 import by.htp.library.service.UserService;
@@ -17,25 +20,25 @@ public class Authorization implements Command {
 	private static final String LOGIN= "login";
 	private static final String PASSWORD = "password";
 	private static final String USER = "user";
-	private static final String ERROR_MESSAGE= "errorMessage";
-	private static final String MESSAGE_WRONG_INFO = "wrong login or password";
-	private static final String MESSAGE_ABOUT_PROBLEM = "Sorry,technical problem";
 	private static final String MAIN_JSP = "WEB-INF/jsp/main.jsp";
-	private static final String INDEX_JSP = "index.jsp";
 	private static final String ROLE= "role";
 	private static final String NAME_USERS= "name";
+	private static final String URL_VIEW_ALL_BOOK_WITH_INFO="http://localhost:8080/WebTask/Controller?command=VIEWALLBOOKS&message=wrong login or password";
+	private static final String URL_VIEW_ALL_BOOK_WITH_ERROR="http://localhost:8080/WebTask/Controller?command=VIEWALLBOOKS&errorMessage=Sorry,technical problem";
+	private static final String MESSAGE_LOGGER_INFO ="Wrong authorization ";
 	
+    private static final Logger LOGGER = LogManager.getRootLogger();
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
+		
+		User user = null;
 		String login=request.getParameter(LOGIN);
 		String password=request.getParameter(PASSWORD);
 		
 		ServiceFactory factory=ServiceFactory.getInstance();
 		UserService userService=factory.getUserService();
 		
-		User user = null;
-		String page = null;
+		
 		try {
 			user = userService.authorization(login, password);
 			if (user!=null)	{
@@ -47,21 +50,22 @@ public class Authorization implements Command {
 				session.setAttribute(ROLE, role);
 				session.setAttribute(LOGIN,login);
 				request.setAttribute(USER , user);
-			     page=MAIN_JSP ;
-			}
-			else{
-				request.setAttribute( ERROR_MESSAGE, MESSAGE_WRONG_INFO);
-				page=INDEX_JSP;
+			   
+			    RequestDispatcher dispatcher=request.getRequestDispatcher(MAIN_JSP);
 				
+				dispatcher.forward(request, response);
+				
+		     }else{
+				
+				response.sendRedirect(URL_VIEW_ALL_BOOK_WITH_INFO);
 			}
 		} catch (ServiceException e) {
-			request.setAttribute( ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
-			page=INDEX_JSP;
-		}
 			
-		RequestDispatcher dispatcher=request.getRequestDispatcher(page);
-		
-			dispatcher.forward(request, response);
+			LOGGER.info(MESSAGE_LOGGER_INFO);
+			
+			response.sendRedirect(URL_VIEW_ALL_BOOK_WITH_ERROR);
+			
+		}	
 			
 	}
 

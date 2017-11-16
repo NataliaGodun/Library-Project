@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import by.htp.library.command.Command;
 
 public class LocaleEn implements Command {
+	private static final String LOCALE_EN= "WEB-INF/jsp/localeEn.jsp";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		RequestDispatcher dispatcher=request.getRequestDispatcher("WEB-INF/jsp/localeEn.jsp");
+		RequestDispatcher dispatcher=request.getRequestDispatcher(LOCALE_EN);
 		
 		dispatcher.forward(request, response);
 	}
