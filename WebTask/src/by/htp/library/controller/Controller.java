@@ -7,6 +7,11 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp.library.command.Command;
 import by.htp.library.dao.connection.pool.ConnectionPool;
 import by.htp.library.dao.connection.pool.ConnectionPoolException;
@@ -18,7 +23,11 @@ public class Controller extends HttpServlet {
 	   private static final long serialVersionUID = -1852427791495732042L;
 	
 	   private static final CommandProvider PROVIDER=new CommandProvider();  
-	   private static final String REQUEST_PARAMETR="command";  
+	   private static final String REQUEST_PARAMETR="command"; 
+	   private static final String MESSAGE_ERROR_CREATING_CONNECTION_POOL="Error creating connection pool";
+		
+	   private static final Logger LOGGER = LogManager.getRootLogger();
+		
 		
 	 
 	    public Controller() {
@@ -35,8 +44,10 @@ public class Controller extends HttpServlet {
 				try {
 					cp.initPoolData();
 				} catch (ConnectionPoolException e) {
-						throw new CreatingConnectionPoolException(e);
 					
+					LOGGER.log(Level.ERROR, MESSAGE_ERROR_CREATING_CONNECTION_POOL, e);	
+		
+					throw new CreatingConnectionPoolException(e);
 				}
 		}
 		

@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +23,7 @@ public class DeleteBook implements Command {
 	private static final String MESSAGE_SUCCESSFUL_DELETE = "&messageInfo=Book successful delete!";
 	private static final String URL_VIEW_ALL_BOOK=" http://localhost:8080/WebTask/Controller?command=viewAllBooks";
 	private static final String VIEW_JSP = "WEB-INF/jsp/viewBook.jsp";
-	private static final String MESSAGE_LOGGER_INFO ="Delete book has occurred an exception";
+	private static final String MESSAGE_ERROR_REMOVE_BOOK ="Error of removal of the book";
 	
     private static final Logger LOGGER = LogManager.getRootLogger();
 	@Override
@@ -44,7 +45,8 @@ public class DeleteBook implements Command {
 			    response.sendRedirect(url2);
 		
 		} catch (ServiceException e) {
-			LOGGER.info(MESSAGE_LOGGER_INFO);
+			
+			LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_BOOK, e);	
 			
 			request.setAttribute(ERROR_MESSAGE, MESSAGE_FAIL_DELETE);
 			page=VIEW_JSP;

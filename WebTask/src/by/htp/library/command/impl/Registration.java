@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,17 +23,13 @@ public class Registration implements Command {
 	private static final String LOGIN= "login";
 	private static final String PASSWORD = "password";
 	private static final String USER = "user";
-	private static final String ERROR_MESSAGE= "errorMessage";
-	private static final String MESSAGE_LOGIN_EXISTS = "The user with such login already exists";
-	private static final String MESSAGE_ABOUT_PROBLEM = "Sorry,technical problem";
 	private static final String MAIN_JSP = "WEB-INF/jsp/main.jsp";
-	private static final String INDEX_JSP = "index.jsp";
 	private static final String NAME_USER = "name";
 	private static final String ROLE= "role";
 	private static final String NAME_USERS= "name";
 	private static final String URL_VIEW_ALL_BOOK_WITH_INFO="http://localhost:8080/WebTask/Controller?command=VIEWALLBOOKS&message=The user with such login already exists";
 	private static final String URL_VIEW_ALL_BOOK_WITH_ERROR="http://localhost:8080/WebTask/Controller?command=VIEWALLBOOKS&errorMessage=Sorry,technical problem";
-	private static final String MESSAGE_LOGGER_INFO="Wrong registration ";
+	private static final String MESSAGE_ERROR_REGISTRATION="Error registration ";
 	
 	private static final Logger LOGGER = LogManager.getRootLogger();
 	
@@ -70,7 +67,7 @@ public class Registration implements Command {
 			}
 		} catch (ServiceException e) {
 			
-			LOGGER.info(MESSAGE_LOGGER_INFO);
+			LOGGER.log(Level.ERROR,MESSAGE_ERROR_REGISTRATION, e);	
 			
 			response.sendRedirect(URL_VIEW_ALL_BOOK_WITH_ERROR);
 		}

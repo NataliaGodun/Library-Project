@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import by.htp.library.command.Command;
@@ -15,7 +17,7 @@ import by.htp.library.command.Command;
 public class GetImage implements Command {
 	private static final String INDEX= "index";
 	private static final String CONTENT_TYPE_IMAGE_JPG= "image/jpg";
-	private static final String MESSAGE_LOGGER_INFO = "The exception has occurred at GetImage";
+	private static final String MESSAGE_ERROR_GET_IMAGE = "Error at GetImage";
 
 	private static final Logger LOGGER = LogManager.getRootLogger();
 
@@ -30,8 +32,7 @@ public class GetImage implements Command {
 			outputStream.write(imageContent);
 			
 		}catch(IOException e){
-				
-			LOGGER.info(MESSAGE_LOGGER_INFO );
+			LOGGER.log(Level.ERROR,MESSAGE_ERROR_GET_IMAGE, e);	
 			
 		}finally{
 		outputStream.close();

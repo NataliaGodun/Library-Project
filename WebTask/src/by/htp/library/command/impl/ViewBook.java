@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,7 +25,7 @@ public class ViewBook implements Command {
 	private static final String ERROR_MESSAGE = "ErrorMessage";
 	private static final String MESSAGE_ABOUT_PROBLEM= "Sorry,technical problem";
 	private static final String MESSAGE ="message";
-	private static final String MESSAGE_LOGGER_INFO="The exception has occurred by a call of command of view book";
+	private static final String MESSAGE_ERROR_VIEW_BOOK="Error at view book";
 	
 	private static final Logger LOGGER = LogManager.getRootLogger();
 	
@@ -53,7 +54,8 @@ public class ViewBook implements Command {
 			
 		} catch (ServiceException e) {
 			
-			LOGGER.info(MESSAGE_LOGGER_INFO);
+			LOGGER.log(Level.ERROR,MESSAGE_ERROR_VIEW_BOOK, e);	
+			
 			request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
 			page=MAIN_JSP;
 		}

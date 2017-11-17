@@ -23,8 +23,29 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public final class ConnectionPoolimpl implements ConnectionPool{
+	private static final String DRIVER_NAME=  "org.gjt.mm.mysql.Driver";
+	private static final String URL=  "jdbc:mysql://127.0.0.1/site?useSSL=false";
+	private static final String USER= "root";
+	private static final String PASSWORD=  "ER567ghm";
+	private static final String MESSAGE_SQL_EXCEPTION_CONNECTION_POOL=  "SQLException in ConnectionPool";
+	private static final String MESSAGE_ERROR_CLOSING_CONNECTION="Error closing the connection.";
+	private static final String MESSAGE_ERROR_FIND_DATABASE_DRIVER="Can't find database driver class";
+	private static final String MESSAGE_ERROR_CONNECTION_DATA_SOURCE="Error connecting to the data source.";
+	private static final String MESSAGE_CONNECTION_NOT_RETURN_POOL="Connection isn't return to the pool.";
+	private static final String MESSAGE_RESULTSET_IS_NOT_CLOSED= "ResultSet isn't closed.";
+	private static final String MESSAGE_STATEMENT_IS_NOT_CLOSED="Statement isn't closed.";
+	private static final String MESSAGE_ERROR_REMOVE_DATA_SOURCE="Error remove to the data source.";
+	private static final String MESSAGE_ATTEMPTING_CLOSE_CLOSED_CONNECTION="Attempting to close closed connection.";
+	private static final String MESSAGE_ERROR_DELETING_CONNECTION= "Error deleting connection from the given away connections pool.";
+	private static final String MESSAGE_ERROR_ALLOCATING_CONNECTION= "Error allocating connection in the pool.";
+	
+	private static final Logger LOGGER = LogManager.getRootLogger();
 	private BlockingQueue<Connection> connectionQueue;
 	private BlockingQueue<Connection> givenAwayConQueue;
 	private String driverName;
@@ -34,10 +55,10 @@ public final class ConnectionPoolimpl implements ConnectionPool{
 	private int poolSize;
 
 	ConnectionPoolimpl() {
-		this.driverName = "org.gjt.mm.mysql.Driver";
-		this.url = "jdbc:mysql://127.0.0.1/site?useSSL=false";
-		this.user = "root";
-		this.password = "ER567ghm";
+		this.driverName = DRIVER_NAME;
+		this.url = URL;
+		this.user = USER;
+		this.password = PASSWORD;
 	    this.poolSize =2;
 		
 	}
@@ -53,9 +74,14 @@ public void initPoolData() throws ConnectionPoolException {
 				connectionQueue.add(pooledConnection);
 			}
 		} catch (SQLException e) {
-			throw new ConnectionPoolException("SQLException in ConnectionPool", e);
+			
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_CLOSING_CONNECTION, e);
+			throw new ConnectionPoolException(MESSAGE_SQL_EXCEPTION_CONNECTION_POOL, e);
+			
 		} catch (ClassNotFoundException e) {
-			throw new ConnectionPoolException("Can't find database driver class", e);
+			
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_CLOSING_CONNECTION, e);
+			throw new ConnectionPoolException(MESSAGE_ERROR_FIND_DATABASE_DRIVER, e);
 		}
 	}
 
@@ -68,7 +94,8 @@ public void initPoolData() throws ConnectionPoolException {
 			closeConnectionsQueue(givenAwayConQueue);
 			closeConnectionsQueue(connectionQueue);
 		} catch (SQLException e) {
-			// logger.log(Level.ERROR, "Error closing the connection.", e);
+			
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_CLOSING_CONNECTION, e);	
 		}
 	}
 
@@ -78,19 +105,21 @@ public void initPoolData() throws ConnectionPoolException {
 			connection = connectionQueue.take();
 			givenAwayConQueue.add(connection);
 		} catch (InterruptedException e) {
-			throw new ConnectionPoolException("Error connecting to the data source.", e);
+			LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_DATA_SOURCE, e);
+			throw new ConnectionPoolException(MESSAGE_ERROR_CONNECTION_DATA_SOURCE, e);
 		}
 		return connection;
 	}
+	
 	public void removeConnection() throws ConnectionPoolException {
 		Connection connection;
 		try {
 			connection=givenAwayConQueue.take();
 			connectionQueue.add(connection);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 			
+			LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_DATA_SOURCE, e);		
+		}	
 	}
 	
 
@@ -98,18 +127,17 @@ public void initPoolData() throws ConnectionPoolException {
 		try {
 			con.close();
 		} catch (SQLException e) {
-
-			// logger.log(Level.ERROR, "Connection isn't return to the pool.");
+			LOGGER.log(Level.ERROR, MESSAGE_CONNECTION_NOT_RETURN_POOL);
 		}
 		try {
 			rs.close();
 		} catch (SQLException e) {
-			// logger.log(Level.ERROR, "ResultSet isn't closed.");
+			LOGGER.log(Level.ERROR,MESSAGE_RESULTSET_IS_NOT_CLOSED);
 		}
 		try {
 			st.close();
 		} catch (SQLException e) {
-			// logger.log(Level.ERROR, "Statement isn't closed.");
+			LOGGER.log(Level.ERROR, MESSAGE_STATEMENT_IS_NOT_CLOSED);
 		}
 	}
 
@@ -117,12 +145,12 @@ public void initPoolData() throws ConnectionPoolException {
 		try {
 			con.close();
 		} catch (SQLException e) {
-			// logger.log(Level.ERROR, "Connection isn't return to the pool.");
+			LOGGER.log(Level.ERROR, MESSAGE_CONNECTION_NOT_RETURN_POOL);
 		}
 		try {
 			st.close();
 		} catch (SQLException e) {
-			// logger.log(Level.ERROR, "Statement isn't closed.");
+			LOGGER.log(Level.ERROR, MESSAGE_STATEMENT_IS_NOT_CLOSED);
 		}
 	}
 
@@ -156,17 +184,17 @@ public void initPoolData() throws ConnectionPoolException {
 		@Override
 		public void close() throws SQLException {
 			if (connection.isClosed()) {
-				throw new SQLException("Attempting to close closed connection.");
+				throw new SQLException(MESSAGE_ATTEMPTING_CLOSE_CLOSED_CONNECTION);
 			}
 
 			if (connection.isReadOnly()) {
 				connection.setReadOnly(false);
 			}
 			if (!givenAwayConQueue.remove(this)) {
-				throw new SQLException("Error deleting connection from the given away connections pool.");
+				throw new SQLException(MESSAGE_ERROR_DELETING_CONNECTION);
 			}
 			if (!connectionQueue.offer(this)) {
-				throw new SQLException("Error allocating connection in the pool.");
+				throw new SQLException(MESSAGE_ERROR_ALLOCATING_CONNECTION);
 			}
 		}
 

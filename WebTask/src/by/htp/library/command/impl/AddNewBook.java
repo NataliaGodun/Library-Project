@@ -36,7 +36,7 @@ public class AddNewBook implements Command {
 	private static final String URL_VIEW_BOOK="http://localhost:8080/WebTask/Controller?command=viewBook&id=";
 	private static final String ADD_NEW_BOOK_JSP = "WEB-INF/jsp/addNewBook.jsp";
 	private static final String PATH_IMAGE = "C:/Users/Dima/git/Library-Project/WebTask/WebContent/resources/images/";
-	private static final String MESSAGE_LOGGER_INFO ="At addition of the book there was a mistake";
+	private static final String MESSAGE_ERROR_ADDITION_BOOK ="Error at addition of the book.";
 			
     private static final Logger LOGGER = LogManager.getRootLogger();
 	
@@ -95,15 +95,15 @@ public class AddNewBook implements Command {
 						
 			} catch (ServiceException e) {
 				
-				LOGGER.info(MESSAGE_LOGGER_INFO);
-				
+				LOGGER.log(Level.ERROR, MESSAGE_ERROR_ADDITION_BOOK,e);
+		
 				request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
 				page=ADD_NEW_BOOK_JSP;
 				
 				RequestDispatcher dispatcher=request.getRequestDispatcher(page);
 				dispatcher.forward(request, response);
 					
-			}	finally {
+			}finally {
 		        if (out != null) {
 		            out.close();
 		        }

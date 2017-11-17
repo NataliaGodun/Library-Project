@@ -6,6 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp.library.dao.UserDAO;
 import by.htp.library.dao.connection.pool.ConnectionPool;
 import by.htp.library.dao.connection.pool.ConnectionPoolException;
@@ -21,12 +25,17 @@ public class SQLUserDAO implements UserDAO {
 	private static final String EDIT_PROFILE_PASSWORD = "UPDATE USERS SET PASSWORD=? WHERE LOGIN=? AND STATUS='EXIST'";
 	private static final String GUEST ="guest";
 	private static final String EXIST ="exist";
+	private static final String MESSAGE_ERROR_CONNECTION_POOL = "Error at connection pool.";
+	private static final String MESSAGE_ERROR_SQL = "Error at sql.";
+	private static final String MESSAGE_ERROR_REMOVE_CONNECTION = "Error at remove connection.";
 	private static final int FIRST = 1;
 	private static final int SECOND= 2;
 	private static final int THIRD = 3;
 	private static final int FOURTH = 4;
 	private static final int FIFTH = 5;
 
+	private static final Logger LOGGER = LogManager.getRootLogger();
+	
 	@Override
 	public User authorization(String login, String password) throws DAOException {
 		Connection con = null;
@@ -51,16 +60,17 @@ public class SQLUserDAO implements UserDAO {
 			}
 
 		} catch (ConnectionPoolException e) {
+			LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_POOL, e);
 			throw new DAOException(e);
 		} catch (SQLException e) {
+			LOGGER.log(Level.ERROR,MESSAGE_ERROR_SQL, e);
 			throw new DAOException(e);	
 		}
 		finally{
 			try {
 				cp.removeConnection();
 			} catch (ConnectionPoolException e) {
-				// Log.ERROR
-				e.printStackTrace();
+				LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_CONNECTION, e);
 			}
 		}
 		return user;
@@ -109,16 +119,17 @@ public class SQLUserDAO implements UserDAO {
 				  }
 			   }
 			}catch (ConnectionPoolException e) {
+				LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_POOL, e);
 				throw new DAOException(e);
 			} catch (SQLException e) {
+				LOGGER.log(Level.ERROR,MESSAGE_ERROR_SQL, e);
 				throw new DAOException(e);
 			}
 			finally{
 				try {
 					cp.removeConnection();
 				} catch (ConnectionPoolException e) {
-					// Log.ERROR
-					e.printStackTrace();
+					LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_CONNECTION, e);
 				}
 		}
 		return user;
@@ -152,16 +163,17 @@ public class SQLUserDAO implements UserDAO {
 				user = new User(id, nameBD, loginBD, passwordBD, role);
 			}
 			}catch (ConnectionPoolException e) {
+				LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_POOL, e);
 				throw new DAOException(e);
 			} catch (SQLException e) {
+				LOGGER.log(Level.ERROR,MESSAGE_ERROR_SQL, e);
 				throw new DAOException(e);
 			}
 			finally{
 				try {
 					cp.removeConnection();
 				} catch (ConnectionPoolException e) {
-					// Log.ERROR
-					e.printStackTrace();
+					LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_CONNECTION, e);
 				}
 		}
 		return user;
@@ -195,16 +207,17 @@ public class SQLUserDAO implements UserDAO {
 				user = new User(id, nameBD, loginBD, passwordBD, role);
 			}
 			}catch (ConnectionPoolException e) {
+				LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_POOL, e);
 				throw new DAOException(e);
 			} catch (SQLException e) {
+				LOGGER.log(Level.ERROR,MESSAGE_ERROR_SQL, e);
 				throw new DAOException(e);
 			}
 			finally{
 				try {
 					cp.removeConnection();
 				} catch (ConnectionPoolException e) {
-					// Log.ERROR
-					e.printStackTrace();
+					LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_CONNECTION, e);
 				}
 		}
 		return user;

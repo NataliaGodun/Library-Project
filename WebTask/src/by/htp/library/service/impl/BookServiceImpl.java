@@ -1,7 +1,9 @@
 package by.htp.library.service.impl;
 
 import java.util.ArrayList;
-
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import by.htp.library.dao.BookDAO;
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.dao.factory.DAOFactory;
@@ -11,6 +13,11 @@ import by.htp.library.service.exception.ServiceException;
 
 public class BookServiceImpl implements BookService {
 	
+	private static final String MESSAGE_ERROR_LAYER_DAO= "Error from a layer DAO.";
+	
+	private static final Logger LOGGER = LogManager.getRootLogger();
+	
+	
 	public ArrayList<Book> showBooks () throws ServiceException{
 	
 		DAOFactory daoObjectFactory=DAOFactory.getInstance();
@@ -19,6 +26,7 @@ public class BookServiceImpl implements BookService {
 		try {
 		  List=bookDAO.showBook();
 		} catch (DAOException e) {
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_LAYER_DAO, e);
 			throw new ServiceException(e);
 		}
 		return List;	
@@ -35,6 +43,7 @@ public class BookServiceImpl implements BookService {
 		try {
 			return bookDAO.addBook(book);
 		} catch (DAOException e) {
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_LAYER_DAO, e);
 			throw new ServiceException(e);
 		}	
 	}
@@ -49,6 +58,7 @@ public class BookServiceImpl implements BookService {
 		try {
 			return bookDAO.viewBook(id);
 		} catch (DAOException e) {
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_LAYER_DAO, e);
 			throw new ServiceException(e);
 		}	
 	}
@@ -63,6 +73,7 @@ public class BookServiceImpl implements BookService {
 		try {
 			return bookDAO.deleteBook(id);
 		} catch (DAOException e) {
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_LAYER_DAO, e);
 			throw new ServiceException(e);
 		}	
 	}
@@ -77,6 +88,7 @@ public class BookServiceImpl implements BookService {
 		try {
 			return bookDAO.searchBook(nameBook);
 		} catch (DAOException e) {
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_LAYER_DAO, e);
 			throw new ServiceException(e);
 		}	
 	}

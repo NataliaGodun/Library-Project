@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,7 +25,7 @@ public class ViewAllBooks implements Command {
 	private static final String ERROR_MESSAGE = "errorMessage";
 	private static final String MESSAGE_INFO = "messageInfo";
 	private static final String MESSAGE = "message";
-	private static final String MESSAGE_LOGGER_INFO = "The exception has occurred upon transition to the page WEB-INF/jsp/takeAllBook.jsp";
+	private static final String MESSAGE_ERROR_VIEW_ALL_BOOKS = "Error at ViewAllBooks";
 
 	private static final Logger LOGGER = LogManager.getRootLogger();
 	
@@ -55,8 +56,8 @@ public class ViewAllBooks implements Command {
 			
 		}
 	}catch(ServiceException e){
-		
-		LOGGER.info(MESSAGE_LOGGER_INFO );
+	
+		LOGGER.log(Level.ERROR, MESSAGE_ERROR_VIEW_ALL_BOOKS, e);	
 		
 		request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
 		
