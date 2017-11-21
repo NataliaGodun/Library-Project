@@ -4,7 +4,10 @@ import by.htp.library.dao.BookDAO;
 import by.htp.library.dao.UserDAO;
 import by.htp.library.dao.impl.SQLBookDAO;
 import by.htp.library.dao.impl.SQLUserDAO;
-
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 
 public final class DAOFactory {
 private  static final DAOFactory instance = new DAOFactory();

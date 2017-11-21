@@ -2,6 +2,10 @@ package by.htp.library.domain;
 
 import java.io.Serializable;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = -8029435420827813184L;

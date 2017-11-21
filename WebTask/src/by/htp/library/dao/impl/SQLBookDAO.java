@@ -18,7 +18,10 @@ import by.htp.library.dao.connection.pool.ConnectionPoolFactory;
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.domain.Book;
 
-
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 
 public class SQLBookDAO implements BookDAO {
 	private static final String SELECT_ALL_BOOK = "SELECT * FROM BOOKS WHERE STATUS='EXIST'";

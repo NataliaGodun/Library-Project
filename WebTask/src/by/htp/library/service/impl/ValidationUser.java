@@ -2,10 +2,15 @@ package by.htp.library.service.impl;
 
 import by.htp.library.service.exception.ServiceException;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
+
 public class ValidationUser {
 	private static final String MESSAGE_WRONG_LOGIN = "Incorrect login!";
 	private static final String MESSAGE_WRONG_PASSWORD= "Incorrect password!";
-	//private static final String MESSAGE_WRONG_NAME= "Incorrect name!";
+	
 	
 	public static void validateUser(String login,String password) throws ServiceException{
 	

@@ -11,6 +11,10 @@ import by.htp.library.domain.Book;
 import by.htp.library.service.BookService;
 import by.htp.library.service.exception.ServiceException;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class BookServiceImpl implements BookService {
 	
 	private static final String MESSAGE_ERROR_LAYER_DAO= "Error from a layer DAO.";

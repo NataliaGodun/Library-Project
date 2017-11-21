@@ -27,6 +27,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Ñonnect to the database
+ * @author Godun Natalia
+ * @version 1.0
+ */
 
 public final class ConnectionPoolimpl implements ConnectionPool{
 	private static final String DRIVER_NAME=  "org.gjt.mm.mysql.Driver";

@@ -3,13 +3,17 @@ package by.htp.library.service.impl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import by.htp.library.dao.UserDAO;
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.dao.factory.DAOFactory;
 import by.htp.library.domain.User;
 import by.htp.library.service.UserService;
 import by.htp.library.service.exception.ServiceException;
+
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 
 public class UserServiceImpl implements UserService {
 	
@@ -20,12 +24,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public User authorization(String login, String password) throws ServiceException{
-		/*if (login==null||login.isEmpty()){
-			throw new ServiceException(MESSAGE_WRONG_LOGIN);
-		}
-		if (password==null||password.isEmpty()){
-			throw new ServiceException(MESSAGE_WRONG_PASSWORD);
-		}*/
+		
 		ValidationUser.validateUser(login,password);
 		
 		DAOFactory daoObjectFactory=DAOFactory.getInstance();
@@ -40,12 +39,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User registration(String name, String login, String password) throws ServiceException {
-		/*if (login==null||login.isEmpty()){
-			throw new ServiceException(MESSAGE_WRONG_LOGIN);
-		}
-		if (password==null||password.isEmpty()){
-			throw new ServiceException(MESSAGE_WRONG_PASSWORD);
-		}*/
+	
 		ValidationUser.validateUser(login,password);
 		
 		DAOFactory daoObjectFactory=DAOFactory.getInstance();
@@ -60,12 +54,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User editProfileName(String name, String login) throws ServiceException {
-		/*if (login==null||login.isEmpty()){
-			throw new ServiceException(MESSAGE_WRONG_LOGIN);
-		}
-		if (name==null||name.isEmpty()){
-			throw new ServiceException(MESSAGE_WRONG_NAME);
-		}*/
+	
 		ValidationUser.validateUser(login);
 		
 		DAOFactory daoObjectFactory=DAOFactory.getInstance();
@@ -80,12 +69,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User editProfilePassword(String password, String login) throws ServiceException {
-		/*if (login==null||login.isEmpty()){
-			throw new ServiceException(MESSAGE_WRONG_LOGIN);
-		}
-		if (password==null||password.isEmpty()){
-			throw new ServiceException(MESSAGE_WRONG_PASSWORD);
-		}*/
+		
 		ValidationUser.validateUser(login,password);
 		
 		DAOFactory daoObjectFactory=DAOFactory.getInstance();

@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
+
 public interface ConnectionPool {
 	public void initPoolData() throws ConnectionPoolException;
 

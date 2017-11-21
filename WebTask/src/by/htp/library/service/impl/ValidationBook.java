@@ -3,6 +3,10 @@ package by.htp.library.service.impl;
 import by.htp.library.domain.Book;
 import by.htp.library.service.exception.ServiceException;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class ValidationBook {
 
 	private static final String MESSAGE_WRONG_NAME = "Incorrect name of the book";

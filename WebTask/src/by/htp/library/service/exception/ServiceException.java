@@ -1,5 +1,9 @@
 package by.htp.library.service.exception;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class ServiceException extends Exception{
 
 	private static final long serialVersionUID = 4794680371890581356L;

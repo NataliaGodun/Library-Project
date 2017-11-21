@@ -17,6 +17,10 @@ import by.htp.library.dao.connection.pool.ConnectionPoolFactory;
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.domain.User;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class SQLUserDAO implements UserDAO {
 	private static final String USER_SELECT_LOGIN_PASSWORD  = "SELECT * FROM USERS WHERE LOGIN=? AND PASSWORD=? AND STATUS='EXIST'";
 	private static final String USER_SELECT_LOGIN = "SELECT * FROM USERS WHERE LOGIN=? AND STATUS='EXIST'";

@@ -5,6 +5,10 @@ import by.htp.library.service.UserService;
 import by.htp.library.service.impl.BookServiceImpl;
 import by.htp.library.service.impl.UserServiceImpl;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class ServiceFactory {
 	private final static ServiceFactory instance = new ServiceFactory();
 	
