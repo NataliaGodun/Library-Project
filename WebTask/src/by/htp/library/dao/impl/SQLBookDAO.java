@@ -196,7 +196,7 @@ public class SQLBookDAO implements BookDAO {
 	@Override
 	public Book deleteBook(int  id) throws DAOException {
 		Connection con = null;
-		ResultSet rs = null;
+		//ResultSet rs = null;
 		Book book= null;
 		
 		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
