@@ -33,4 +33,17 @@
     <servlet-name>ImageController</servlet-name>
     <url-pattern>/ImageController</url-pattern>
   </servlet-mapping>
+  <filter>
+		<display-name>CharsetFilter</display-name>
+		<filter-name>CharsetFilter</filter-name>
+		<filter-class>by.htp.library.filter.CharsetFilter</filter-class>
+		<init-param>
+			<param-name>characterEncoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharsetFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>
