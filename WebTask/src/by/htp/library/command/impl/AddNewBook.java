@@ -21,7 +21,10 @@ import by.htp.library.service.BookService;
 import by.htp.library.service.exception.ServiceException;
 import by.htp.library.service.factory.ServiceFactory;
 
-
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class AddNewBook implements Command {
 	private static final String NAME_BOOK = "nameBook";
 	private static final String NAME_WRITER= "writer";

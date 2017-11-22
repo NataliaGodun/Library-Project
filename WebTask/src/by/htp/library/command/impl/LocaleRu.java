@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.htp.library.command.Command;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class LocaleRu implements Command {
 	private static final String LOCALE_RU= "WEB-INF/jsp/localeRu.jsp";
 

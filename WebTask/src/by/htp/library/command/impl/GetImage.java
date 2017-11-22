@@ -13,7 +13,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import by.htp.library.command.Command;
 
-
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class GetImage implements Command {
 	private static final String INDEX= "index";
 	private static final String CONTENT_TYPE_IMAGE_JPG= "image/jpg";

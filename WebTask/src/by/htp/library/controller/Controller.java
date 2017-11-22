@@ -14,71 +14,84 @@ import by.htp.library.dao.connection.pool.ConnectionPool;
 import by.htp.library.dao.connection.pool.ConnectionPoolException;
 import by.htp.library.dao.connection.pool.ConnectionPoolFactory;
 
+/**
+ * handles get and post requests
+ * 
+ * @author Godun Natalia
+ * @version 1.0
+ */
 
 public class Controller extends HttpServlet {
-	
-	   private static final long serialVersionUID = -1852427791495732042L;
-	
-	   private static final CommandProvider PROVIDER=new CommandProvider();  
-	   private static final String REQUEST_PARAMETR="command"; 
-	   private static final String MESSAGE_ERROR_CREATING_CONNECTION_POOL="Error creating connection pool";
-		
-	   private static final Logger LOGGER = LogManager.getRootLogger();
-		
-		
-	 
-	    public Controller() {
-	        super();
-	    }
 
-		@Override
-		public void init(ServletConfig config) throws ServletException {
-			
-			super.init(config);
-			ConnectionPoolFactory objectCPFactory = ConnectionPoolFactory.getInstance();
-			ConnectionPool cp =objectCPFactory.getConnectionPool();
-			
-				try {
-					cp.initPoolData();
-				} catch (ConnectionPoolException e) {
-					
-					LOGGER.log(Level.ERROR, MESSAGE_ERROR_CREATING_CONNECTION_POOL, e);	
-		
-					throw new CreatingConnectionPoolException(e);
-				}
-		}
-		
-		
-		@Override
-		protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
-			super.service(arg0, arg1);
-		}
-		
-		
-		protected void doGet(HttpServletRequest request,
-	            HttpServletResponse response) throws ServletException, IOException {
-			
-				String commandName = request.getParameter(REQUEST_PARAMETR);
-				Command command = PROVIDER.getCommand(commandName);
-				command.execute(request, response);	
-		
-		}
+	private static final long serialVersionUID = -1852427791495732042L;
 
-		
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-				String commandName=request.getParameter(REQUEST_PARAMETR);
-				Command command=PROVIDER.getCommand(commandName);
-				command.execute(request, response);
-		
+	private static final CommandProvider PROVIDER = new CommandProvider();
+	private static final String REQUEST_PARAMETR = "command";
+	private static final String MESSAGE_ERROR_CREATING_CONNECTION_POOL = "Error creating connection pool";
+	private static final Logger LOGGER = LogManager.getRootLogger();
+
+	public Controller() {
+		super();
+	}
+
+	/**
+	 * init HttpServlet and ConnectionPool
+	 */
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+
+		super.init(config);
+		ConnectionPoolFactory objectCPFactory = ConnectionPoolFactory.getInstance();
+		ConnectionPool cp = objectCPFactory.getConnectionPool();
+
+		try {
+			cp.initPoolData();
+		} catch (ConnectionPoolException e) {
+
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_CREATING_CONNECTION_POOL, e);
+
+			throw new CreatingConnectionPoolException(e);
 		}
-		
-		 
-		public void destroy(){
-			super.destroy();
-			ConnectionPoolFactory objectCPFactory = ConnectionPoolFactory.getInstance();
-			ConnectionPool cp =objectCPFactory.getConnectionPool();
-			cp.dispose();
-		}	
-	
+	}
+
+	/**
+	 * handles get requests
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String commandName = request.getParameter(REQUEST_PARAMETR);
+		Command command = PROVIDER.getCommand(commandName);
+		command.execute(request, response);
+
+	}
+
+	/**
+	 * handles post requests
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String commandName = request.getParameter(REQUEST_PARAMETR);
+		Command command = PROVIDER.getCommand(commandName);
+		command.execute(request, response);
+
+	}
+
+	/**
+	 * destroy HttpServlet and ConnectionPool
+	 */
+	public void destroy() {
+		super.destroy();
+		ConnectionPoolFactory objectCPFactory = ConnectionPoolFactory.getInstance();
+		ConnectionPool cp = objectCPFactory.getConnectionPool();
+		cp.dispose();
+	}
+
 }

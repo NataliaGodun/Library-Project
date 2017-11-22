@@ -22,7 +22,10 @@ import by.htp.library.command.impl.ShowEditProfileForm;
 import by.htp.library.command.impl.ShowRegistrationForm;
 import by.htp.library.command.impl.ViewBook;
 
-
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class CommandProvider {
 	private Map<CommandName, Command> commands = new HashMap<>();
 

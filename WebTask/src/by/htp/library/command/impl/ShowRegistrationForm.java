@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.htp.library.command.Command;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class ShowRegistrationForm implements Command {
 
 	private static final String REGISTRATION_FORM_JSP ="WEB-INF/jsp/reg.jsp";

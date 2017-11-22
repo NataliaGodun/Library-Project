@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.htp.library.command.Command;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class ShowEditProfileForm implements Command {
 	private static final String EDIT_PROFILE_JSP ="WEB-INF/jsp/EditProfile.jsp";
 	@Override

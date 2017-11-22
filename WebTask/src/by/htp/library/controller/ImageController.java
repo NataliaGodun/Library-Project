@@ -10,7 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.htp.library.command.Command;
 
-
+/**
+ * handles  get and post requests with files
+ * 
+ * @author Godun Natalia
+ * @version 1.0
+ */
 
 @MultipartConfig
 public class ImageController extends HttpServlet {
@@ -27,6 +32,9 @@ public class ImageController extends HttpServlet {
         
     }
 	
+	/**
+	 * init HttpServlet 
+	 */
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		
@@ -34,6 +42,12 @@ public class ImageController extends HttpServlet {
 		
 	}
 	
+	/**
+	 * handles get requests
+	 * 
+	 * @param request
+	 * @param response
+	 */
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String commandName = request.getParameter(REQUEST_PARAMETR);
@@ -41,7 +55,12 @@ public class ImageController extends HttpServlet {
 		command.execute(request, response);	
 	}
 	
-	
+	/**
+	 * handles post requests
+	 * 
+	 * @param request
+	 * @param response
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Command command=PROVIDER.getCommand(ADD_NEW_BOOK);
@@ -49,7 +68,9 @@ public class ImageController extends HttpServlet {
 	}
 	
 	
-	
+	/**
+	 * destroy HttpServlet 
+	 */
 	public void destroy(){
 		super.destroy();
 		

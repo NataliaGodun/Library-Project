@@ -9,6 +9,10 @@ import javax.servlet.http.HttpSession;
 import by.htp.library.command.Command;
 
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class Exit implements Command {
 	private static final String INDEX_JSP ="index.jsp";
 	

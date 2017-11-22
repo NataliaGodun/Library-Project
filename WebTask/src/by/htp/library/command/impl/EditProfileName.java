@@ -18,6 +18,10 @@ import by.htp.library.service.UserService;
 import by.htp.library.service.exception.ServiceException;
 import by.htp.library.service.factory.ServiceFactory;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class EditProfileName implements Command {
 	private static final String LOGIN= "login";
 	private static final String USER = "user";

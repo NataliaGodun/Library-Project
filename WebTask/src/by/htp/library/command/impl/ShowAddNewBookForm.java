@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.htp.library.command.Command;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class ShowAddNewBookForm implements Command {
 	private static final String ADD_NEW_BOOK_JSP ="WEB-INF/jsp/addNewBook.jsp";
 	@Override

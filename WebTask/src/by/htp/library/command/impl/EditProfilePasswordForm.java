@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.htp.library.command.Command;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class EditProfilePasswordForm implements Command {
 
 	private static final String EDIT_PASSWORD_JSP ="WEB-INF/jsp/editProfilePasswordForm.jsp";

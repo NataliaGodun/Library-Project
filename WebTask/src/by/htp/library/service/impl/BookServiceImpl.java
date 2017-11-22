@@ -68,14 +68,14 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public Book deleteBook(int id) throws ServiceException {
+	public void deleteBook(int id) throws ServiceException {
 		
 		ValidationBook.validateBook(id);
 		
 		DAOFactory daoObjectFactory=DAOFactory.getInstance();
 		BookDAO bookDAO=daoObjectFactory.getBookDAO();
 		try {
-			return bookDAO.deleteBook(id);
+			bookDAO.deleteBook(id);
 		} catch (DAOException e) {
 			LOGGER.log(Level.ERROR, MESSAGE_ERROR_LAYER_DAO, e);
 			throw new ServiceException(e);

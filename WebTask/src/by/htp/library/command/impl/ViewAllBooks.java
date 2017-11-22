@@ -17,6 +17,10 @@ import by.htp.library.service.BookService;
 import by.htp.library.service.exception.ServiceException;
 import by.htp.library.service.factory.ServiceFactory;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class ViewAllBooks implements Command {
 	private static final String LIST = "List";
 	private static final String MESSAGE_NO_BOOKS = " There are no available books";

@@ -1,5 +1,9 @@
 package by.htp.library.controller;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class CreatingConnectionPoolException extends RuntimeException {
 
 	private static final long serialVersionUID = 3185938667870778580L;

@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import by.htp.library.command.Command;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class EditProfileNameForm implements Command {
 	private static final String EDIT_NAME_JSP ="WEB-INF/jsp/editProfileNameForm.jsp";
 	@Override

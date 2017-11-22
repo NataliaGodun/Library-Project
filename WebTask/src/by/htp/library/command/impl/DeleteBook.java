@@ -16,6 +16,10 @@ import by.htp.library.service.BookService;
 import by.htp.library.service.exception.ServiceException;
 import by.htp.library.service.factory.ServiceFactory;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class DeleteBook implements Command {
 	private static final String ID ="id";
 	private static final String ERROR_MESSAGE = "errorMessage";

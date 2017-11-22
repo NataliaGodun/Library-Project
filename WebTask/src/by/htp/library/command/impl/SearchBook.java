@@ -17,6 +17,10 @@ import by.htp.library.service.BookService;
 import by.htp.library.service.exception.ServiceException;
 import by.htp.library.service.factory.ServiceFactory;
 
+/**
+ * @author Godun Natalia
+ * @version 1.0
+ */
 public class SearchBook implements Command {
 	private static final String BOOK = "book";
 	private static final String NAME_BOOK = "nameBook";
