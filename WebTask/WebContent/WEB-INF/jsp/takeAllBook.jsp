@@ -24,10 +24,19 @@
 			<h1>
 				<fmt:message key="label.electronicLibrary" />
 			</h1>
+			
 		</div>	
+		
 	</div>
 	<br />
 	<br />
+	<div id="exit">
+	<form action="Controller" method="get">
+		<input type="hidden" name="command" value="exit" /> <br />
+		<input type="submit" value="Exit" />
+		</form>
+	</div>
+	
 				
 	<div id="language">
 		<div id="languageRu">
@@ -56,14 +65,14 @@
 		<br />
 	</c:if>
 	
-	
-	Select 
-	<br />
+	<div id="search">
+		<fmt:message key="label.select" />
+	</div>
 	<form action="Controller" method="get">
 						
 			<input type="hidden" name="command" value="searchBook" /> 
 			<input type="text" name="nameBook" value="" /> 
-			<input type="submit" value="Search of the book" />
+			<input type="submit" value=<fmt:message key="label.searchBook" /> />
 	</form>		
 	
 	<div id="inline">
@@ -78,7 +87,7 @@
 			<div id="book">
 				<div id="image">
 					<c:if test="${not empty  List.image}">
-						  <img src="${pageContext.request. contextPath}/ImageController?command=GetImage&index=${List.image}" width="70%"/>
+						  <img src="${pageContext.request. contextPath}/ImageController?command=GetImage&index=${List.image}" width="80%"/>
 					</c:if>
 				</div>
 					
@@ -99,7 +108,7 @@
 					<strong>Year:</strong>
 					<c:out value="${ List.year}"/>
 					<br />
-				
+					<br />
 					<form action="Controller" method="get">
 						<input type="hidden" name="command" value="viewBook" /> 
 						<input type="hidden" name="id" value="${List.id}" /> 
@@ -110,8 +119,8 @@
 					
 				</div>
 			</div>
-			<br />
 			
+			<br />
 			</c:forEach>
 		
 		</div>
@@ -141,6 +150,7 @@
 			<br />
 			<br />
 			
+	<div id="manage">
 	<c:if test="${sessionScope.role=='admin' }">
 		<form action="Controller" method="get">
 						<input type="hidden" name="command" value="ShowAddNewBookForm" /> 
@@ -148,12 +158,10 @@
 					</form>
 	</c:if>	
 	
-	<form action="Controller" method="get">
-		<input type="hidden" name="command" value="exit" /> <br />
-		<input type="submit" value="Exit" />
-		</form>
-		
 	</div>
+	</div>
+	
+	
 	
 	<div id="footer"> All right reserved</div>
 	

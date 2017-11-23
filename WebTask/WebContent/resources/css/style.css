@@ -12,47 +12,58 @@ html, body {
 	text-align: center; margin: -70px 200px 0px 150px;color: #ffff1a
 }
 #main{
- background: #fefdcb; /* Цвет фона */
+ background: #d9a54f; /* Цвет фона */
  margin:auto;
  padding: 5px;
 }
 #language{
-	
+	display:inline-block;
+	float:right;
 	margin:auto; 
 }
 #languageRu{
-	float:left;
+	float:right;
 }
 #languageEn{
-
+	float:right;	
+}
+#search{
+	margin-left: 20px;
+	float:left;
 }
 #inline{
 	display:inline-block;
-		width: 100%;
-
+	width: 100%;
+	padding: 25px;
 }
 #content{
 	border: 4px double black;	
     background: #fdf7bd; /* Цвет фона */
-    padding:25px;
+    margin: 0px 120px 30px 80px;
     float: left;
 	display:block;
-    width:70%;
+    width:60%;
     
 }
 #available{
 	text-align: center;
-	margin: 0px 120px -30px 100px;
+	margin: 0px 120px 0px 100px;
 	background: #ede06d;	
 }
 
 #enterReg{
     background: #fdf7bd; /* Цвет фона */
+    margin:0px 25px -30px 100px;
     display:block;
     padding: 10px; 
     float: right; 
+    
+}
+#manage{
+	float: right; 
 }
 #book{
+	margin:10px 25px 20px 140px;
 	
 }
 #image{
