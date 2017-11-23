@@ -12,12 +12,13 @@ html, body {
 	text-align: center; margin: -70px 200px 0px 150px;color: #ffff1a
 }
 #main{
- background: #dfc220; /* Цвет фона */
+ background: #fefdcb; /* Цвет фона */
  margin:auto;
  padding: 5px;
 }
 #language{
-	 margin: 2px 0px 20px 750px;	
+	
+	margin:auto; 
 }
 #languageRu{
 	float:left;
@@ -61,16 +62,9 @@ html, body {
 #information{
 	margin: 70px 0px 50px 0px;
 }
-#line {
-	display:inline-block;
-}
-#first{
-	float: left; 
-}
+
 #footer {
-	left: 0px;
-	bottom: 0px;
-	border: 2px solid black;
+	text-align: center;
 }
 
 

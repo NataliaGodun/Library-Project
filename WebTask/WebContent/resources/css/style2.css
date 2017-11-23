@@ -12,18 +12,20 @@ html, body {
 	text-align: center; margin: -70px 200px 0px 150px;color: #ffff1a
 }
 #main{
- background: #dfc220; /* Цвет фона */
+ background: #d9a54f; /* Цвет фона */
  margin:auto;
  padding: 5px;
 }
 #language{
-	margin: 10px 0px 20px 1170px; 	
+	display:inline-block;
+	float:right;
+	margin:auto; 
 }
 #languageRu{
-	float:left;
+	float:right;
 }
 #languageEn{
-
+	float:right;	
 }
 #inline{
 	display:inline-block;

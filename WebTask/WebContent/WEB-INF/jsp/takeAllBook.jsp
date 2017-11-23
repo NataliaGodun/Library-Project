@@ -44,14 +44,16 @@
 		</div>
 	</div>
 	
-	<br />	
+		
 	<c:if test="${not empty  requestScope.errorMessage }">
+		<br />
 		<c:out value="${  requestScope.errorMessage }" />
-			<br />
+		<br />
 	</c:if>
 	<c:if test="${not empty  requestScope.messageInfo }">
+		<br />
 		<c:out value="${  requestScope.messageInfo }" />
-			<br />
+		<br />
 	</c:if>
 	
 	
@@ -158,3 +160,4 @@
 	</div>
 </body>
 </html>
+
