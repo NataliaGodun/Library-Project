@@ -6,10 +6,10 @@ import java.io.Serializable;
  * @author Godun Natalia
  * @version 1.0
  */
-public class Book implements Serializable{
+public class Book implements Serializable {
 
 	private static final long serialVersionUID = 2661300046083956194L;
-	
+
 	private int id;
 	private String writer;
 	private String nameBook;
@@ -17,24 +17,23 @@ public class Book implements Serializable{
 	private String genre;
 	private String house;
 	private String year;
-	
 
 	public Book() {
 
 	}
 
-	public Book(int id,String writer,String nameBook, String image,String genre,String house,String year) {
+	public Book(int id, String writer, String nameBook, String image, String genre, String house, String year) {
 		super();
 		this.id = id;
-		this.writer =writer;
-		this.nameBook =nameBook;
-		this.image=image;
-		this.genre=genre;
-		this.house=house;
-		this.year=year;
-		
+		this.writer = writer;
+		this.nameBook = nameBook;
+		this.image = image;
+		this.genre = genre;
+		this.house = house;
+		this.year = year;
+
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -148,8 +147,9 @@ public class Book implements Serializable{
 			return false;
 		return true;
 	}
-	
-	public String toString() { 
-	    return "Id: " + this.id+ ", writer: '" + this.writer + ", name book: " + this.nameBook + ", genre: "+this.genre+", publishing house: "+this.house+", year: "+this.year;
-	} 
+
+	public String toString() {
+		return "Id: " + this.id + ", writer: '" + this.writer + ", name book: " + this.nameBook + ", genre: "
+				+ this.genre + ", publishing house: " + this.house + ", year: " + this.year;
+	}
 }

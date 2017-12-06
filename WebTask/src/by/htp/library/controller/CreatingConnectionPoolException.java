@@ -10,14 +10,17 @@ public class CreatingConnectionPoolException extends RuntimeException {
 
 	public CreatingConnectionPoolException() {
 		super();
-		}
+	}
+
 	public CreatingConnectionPoolException(String message) {
 		super(message);
-		}
+	}
+
 	public CreatingConnectionPoolException(Exception e) {
 		super(e);
-		}
-	public CreatingConnectionPoolException(String message,Exception e) {
-		super(message,e);
-		}
+	}
+
+	public CreatingConnectionPoolException(String message, Exception e) {
+		super(message, e);
+	}
 }

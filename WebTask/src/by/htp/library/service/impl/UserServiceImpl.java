@@ -16,51 +16,50 @@ import by.htp.library.service.exception.ServiceException;
  */
 
 public class UserServiceImpl implements UserService {
-	
-	private static final String MESSAGE_ERROR_LAYER_DAO= "Error from a layer DAO.";
-	
+
+	private static final String MESSAGE_ERROR_LAYER_DAO = "Error from a layer DAO.";
+
 	private static final Logger LOGGER = LogManager.getRootLogger();
-	
-	
+
 	@Override
-	public User authorization(String login, String password) throws ServiceException{
-		
-		ValidationUser.validateUser(login,password);
-		
-		DAOFactory daoObjectFactory=DAOFactory.getInstance();
-		UserDAO userDAO=daoObjectFactory.getUserDAO();
+	public User authorization(String login, String password) throws ServiceException {
+
+		ValidationUser.validateUser(login, password);
+
+		DAOFactory daoObjectFactory = DAOFactory.getInstance();
+		UserDAO userDAO = daoObjectFactory.getUserDAO();
 		try {
-			return userDAO.authorization(login,password);
+			return userDAO.authorization(login, password);
 		} catch (DAOException e) {
 			LOGGER.log(Level.ERROR, MESSAGE_ERROR_LAYER_DAO, e);
 			throw new ServiceException(e);
-		}	
+		}
 	}
 
 	@Override
 	public User registration(String name, String login, String password) throws ServiceException {
-	
-		ValidationUser.validateUser(login,password);
-		
-		DAOFactory daoObjectFactory=DAOFactory.getInstance();
-		UserDAO userDAO=daoObjectFactory.getUserDAO();
+
+		ValidationUser.validateUser(login, password);
+
+		DAOFactory daoObjectFactory = DAOFactory.getInstance();
+		UserDAO userDAO = daoObjectFactory.getUserDAO();
 		try {
-			return userDAO.registration(name,login,password);
+			return userDAO.registration(name, login, password);
 		} catch (DAOException e) {
 			LOGGER.log(Level.ERROR, MESSAGE_ERROR_LAYER_DAO, e);
 			throw new ServiceException(e);
-		}	
+		}
 	}
 
 	@Override
 	public User editProfileName(String name, String login) throws ServiceException {
-	
+
 		ValidationUser.validateUser(login);
-		
-		DAOFactory daoObjectFactory=DAOFactory.getInstance();
-		UserDAO userDAO=daoObjectFactory.getUserDAO();
+
+		DAOFactory daoObjectFactory = DAOFactory.getInstance();
+		UserDAO userDAO = daoObjectFactory.getUserDAO();
 		try {
-			return userDAO.editProfileName(name,login);
+			return userDAO.editProfileName(name, login);
 		} catch (DAOException e) {
 			LOGGER.log(Level.ERROR, MESSAGE_ERROR_LAYER_DAO, e);
 			throw new ServiceException(e);
@@ -69,13 +68,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User editProfilePassword(String password, String login) throws ServiceException {
-		
-		ValidationUser.validateUser(login,password);
-		
-		DAOFactory daoObjectFactory=DAOFactory.getInstance();
-		UserDAO userDAO=daoObjectFactory.getUserDAO();
+
+		ValidationUser.validateUser(login, password);
+
+		DAOFactory daoObjectFactory = DAOFactory.getInstance();
+		UserDAO userDAO = daoObjectFactory.getUserDAO();
 		try {
-			return userDAO.editProfilePassword(password,login);
+			return userDAO.editProfilePassword(password, login);
 		} catch (DAOException e) {
 			LOGGER.log(Level.ERROR, MESSAGE_ERROR_LAYER_DAO, e);
 			throw new ServiceException(e);

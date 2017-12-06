@@ -9,27 +9,24 @@ import by.htp.library.service.exception.ServiceException;
 
 public class ValidationUser {
 	private static final String MESSAGE_WRONG_LOGIN = "Incorrect login!";
-	private static final String MESSAGE_WRONG_PASSWORD= "Incorrect password!";
-	
-	
-	public static void validateUser(String login,String password) throws ServiceException{
-	
-		if (login==null||login.isEmpty()){
+	private static final String MESSAGE_WRONG_PASSWORD = "Incorrect password!";
+
+	public static void validateUser(String login, String password) throws ServiceException {
+
+		if (login == null || login.isEmpty()) {
 			throw new ServiceException(MESSAGE_WRONG_LOGIN);
 		}
-		if (password==null||password.isEmpty()){
+		if (password == null || password.isEmpty()) {
 			throw new ServiceException(MESSAGE_WRONG_PASSWORD);
 		}
 	}
-	
-	public static void validateUser(String login) throws ServiceException{
-		
-		if (login==null||login.isEmpty()){
+
+	public static void validateUser(String login) throws ServiceException {
+
+		if (login == null || login.isEmpty()) {
 			throw new ServiceException(MESSAGE_WRONG_LOGIN);
 		}
-		
+
 	}
-	
-	
-	
+
 }

@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<fmt:setLocale value="en" scope="session"  />
+	<fmt:setLocale value="en" scope="session" />
 	<c:redirect
 		url="http://localhost:8080/WebTask/Controller?command=VIEWALLBOOKS"></c:redirect>
 </body>

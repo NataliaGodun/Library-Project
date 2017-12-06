@@ -47,8 +47,8 @@ public class CommandProvider {
 		commands.put(CommandName.SEARCHBOOK, new SearchBook());
 		commands.put(CommandName.GETIMAGE, new GetImage());
 		commands.put(CommandName.LOCALERU, new LocaleRu());
-		commands.put(CommandName.LOCALEEN, new LocaleEn());	
-		
+		commands.put(CommandName.LOCALEEN, new LocaleEn());
+
 	}
 
 	public Command getCommand(String commandName) {

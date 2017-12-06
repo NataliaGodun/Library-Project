@@ -22,30 +22,30 @@ import by.htp.library.domain.User;
  * @version 1.0
  */
 public class SQLUserDAO implements UserDAO {
-	private static final String USER_SELECT_LOGIN_PASSWORD  = "SELECT * FROM USERS WHERE LOGIN=? AND PASSWORD=? AND STATUS='EXIST'";
+	private static final String USER_SELECT_LOGIN_PASSWORD = "SELECT * FROM USERS WHERE LOGIN=? AND PASSWORD=? AND STATUS='EXIST'";
 	private static final String USER_SELECT_LOGIN = "SELECT * FROM USERS WHERE LOGIN=? AND STATUS='EXIST'";
 	private static final String USER_ADD = "INSERT INTO USERS (NAME,LOGIN,PASSWORD,ROLE,STATUS) VALUES (?,?,?,?,?)";
 	private static final String EDIT_PROFILE_NAME = "UPDATE USERS SET NAME=? WHERE LOGIN=? AND STATUS='EXIST'";
 	private static final String EDIT_PROFILE_PASSWORD = "UPDATE USERS SET PASSWORD=? WHERE LOGIN=? AND STATUS='EXIST'";
-	private static final String GUEST ="guest";
-	private static final String EXIST ="exist";
+	private static final String GUEST = "guest";
+	private static final String EXIST = "exist";
 	private static final String MESSAGE_ERROR_CONNECTION_POOL = "Error at connection pool.";
 	private static final String MESSAGE_ERROR_SQL = "Error at sql.";
 	private static final String MESSAGE_ERROR_REMOVE_CONNECTION = "Error at remove connection.";
 	private static final int FIRST = 1;
-	private static final int SECOND= 2;
+	private static final int SECOND = 2;
 	private static final int THIRD = 3;
 	private static final int FOURTH = 4;
 	private static final int FIFTH = 5;
 
 	private static final Logger LOGGER = LogManager.getRootLogger();
-	
+
 	@Override
 	public User authorization(String login, String password) throws DAOException {
 		Connection con = null;
 		ResultSet rs = null;
 		User user = null;
-		
+
 		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
 		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
 		try {
@@ -64,17 +64,16 @@ public class SQLUserDAO implements UserDAO {
 			}
 
 		} catch (ConnectionPoolException e) {
-			LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_POOL, e);
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_CONNECTION_POOL, e);
 			throw new DAOException(e);
 		} catch (SQLException e) {
-			LOGGER.log(Level.ERROR,MESSAGE_ERROR_SQL, e);
-			throw new DAOException(e);	
-		}
-		finally{
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_SQL, e);
+			throw new DAOException(e);
+		} finally {
 			try {
 				cp.removeConnection();
 			} catch (ConnectionPoolException e) {
-				LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_CONNECTION, e);
+				LOGGER.log(Level.ERROR, MESSAGE_ERROR_REMOVE_CONNECTION, e);
 			}
 		}
 		return user;
@@ -85,28 +84,28 @@ public class SQLUserDAO implements UserDAO {
 		Connection con = null;
 		ResultSet rs = null;
 		User user = null;
-		
+
 		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
 		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
 		try {
 			con = cp.takeConnection();
-			
-			PreparedStatement ps = con.prepareStatement(USER_SELECT_LOGIN );
+
+			PreparedStatement ps = con.prepareStatement(USER_SELECT_LOGIN);
 			ps.setString(FIRST, login);
 			rs = ps.executeQuery();
-			
-			int i=0;
+
+			int i = 0;
 			while (rs.next()) {
-				 i =rs.getInt("id");
+				i = rs.getInt("id");
 			}
-			if (i==0){
+			if (i == 0) {
 				ps = con.prepareStatement(USER_ADD);
 
 				ps.setString(FIRST, name);
 				ps.setString(SECOND, login);
 				ps.setString(THIRD, password);
-				ps.setString(FOURTH,GUEST );
-				ps.setString(FIFTH,EXIST );
+				ps.setString(FOURTH, GUEST);
+				ps.setString(FIFTH, EXIST);
 				ps.executeUpdate();
 
 				ps = con.prepareStatement(USER_SELECT_LOGIN_PASSWORD);
@@ -120,21 +119,20 @@ public class SQLUserDAO implements UserDAO {
 					String passwordBD = rs.getString(FOURTH);
 					String role = rs.getString(FIFTH);
 					user = new User(id, nameBD, loginBD, passwordBD, role);
-				  }
-			   }
-			}catch (ConnectionPoolException e) {
-				LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_POOL, e);
-				throw new DAOException(e);
-			} catch (SQLException e) {
-				LOGGER.log(Level.ERROR,MESSAGE_ERROR_SQL, e);
-				throw new DAOException(e);
-			}
-			finally{
-				try {
-					cp.removeConnection();
-				} catch (ConnectionPoolException e) {
-					LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_CONNECTION, e);
 				}
+			}
+		} catch (ConnectionPoolException e) {
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_CONNECTION_POOL, e);
+			throw new DAOException(e);
+		} catch (SQLException e) {
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_SQL, e);
+			throw new DAOException(e);
+		} finally {
+			try {
+				cp.removeConnection();
+			} catch (ConnectionPoolException e) {
+				LOGGER.log(Level.ERROR, MESSAGE_ERROR_REMOVE_CONNECTION, e);
+			}
 		}
 		return user;
 	}
@@ -144,18 +142,18 @@ public class SQLUserDAO implements UserDAO {
 		Connection con = null;
 		ResultSet rs = null;
 		User user = null;
-		
+
 		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
 		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
 		try {
 			con = cp.takeConnection();
-			
-			PreparedStatement ps = con.prepareStatement(EDIT_PROFILE_NAME );
+
+			PreparedStatement ps = con.prepareStatement(EDIT_PROFILE_NAME);
 			ps.setString(FIRST, name);
 			ps.setString(SECOND, login);
 			ps.executeUpdate();
 
-			ps = con.prepareStatement(USER_SELECT_LOGIN );
+			ps = con.prepareStatement(USER_SELECT_LOGIN);
 			ps.setString(FIRST, login);
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -166,19 +164,18 @@ public class SQLUserDAO implements UserDAO {
 				String role = rs.getString(FIFTH);
 				user = new User(id, nameBD, loginBD, passwordBD, role);
 			}
-			}catch (ConnectionPoolException e) {
-				LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_POOL, e);
-				throw new DAOException(e);
-			} catch (SQLException e) {
-				LOGGER.log(Level.ERROR,MESSAGE_ERROR_SQL, e);
-				throw new DAOException(e);
+		} catch (ConnectionPoolException e) {
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_CONNECTION_POOL, e);
+			throw new DAOException(e);
+		} catch (SQLException e) {
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_SQL, e);
+			throw new DAOException(e);
+		} finally {
+			try {
+				cp.removeConnection();
+			} catch (ConnectionPoolException e) {
+				LOGGER.log(Level.ERROR, MESSAGE_ERROR_REMOVE_CONNECTION, e);
 			}
-			finally{
-				try {
-					cp.removeConnection();
-				} catch (ConnectionPoolException e) {
-					LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_CONNECTION, e);
-				}
 		}
 		return user;
 	}
@@ -188,18 +185,18 @@ public class SQLUserDAO implements UserDAO {
 		Connection con = null;
 		ResultSet rs = null;
 		User user = null;
-		
+
 		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
 		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
 		try {
 			con = cp.takeConnection();
-			
+
 			PreparedStatement ps = con.prepareStatement(EDIT_PROFILE_PASSWORD);
 			ps.setString(FIRST, password);
 			ps.setString(SECOND, login);
 			ps.executeUpdate();
 
-			ps = con.prepareStatement(USER_SELECT_LOGIN );
+			ps = con.prepareStatement(USER_SELECT_LOGIN);
 			ps.setString(FIRST, login);
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -210,22 +207,20 @@ public class SQLUserDAO implements UserDAO {
 				String role = rs.getString(FIFTH);
 				user = new User(id, nameBD, loginBD, passwordBD, role);
 			}
-			}catch (ConnectionPoolException e) {
-				LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_POOL, e);
-				throw new DAOException(e);
-			} catch (SQLException e) {
-				LOGGER.log(Level.ERROR,MESSAGE_ERROR_SQL, e);
-				throw new DAOException(e);
+		} catch (ConnectionPoolException e) {
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_CONNECTION_POOL, e);
+			throw new DAOException(e);
+		} catch (SQLException e) {
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_SQL, e);
+			throw new DAOException(e);
+		} finally {
+			try {
+				cp.removeConnection();
+			} catch (ConnectionPoolException e) {
+				LOGGER.log(Level.ERROR, MESSAGE_ERROR_REMOVE_CONNECTION, e);
 			}
-			finally{
-				try {
-					cp.removeConnection();
-				} catch (ConnectionPoolException e) {
-					LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_CONNECTION, e);
-				}
 		}
 		return user;
 	}
 
-	
 }

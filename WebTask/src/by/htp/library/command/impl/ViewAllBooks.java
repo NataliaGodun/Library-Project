@@ -32,45 +32,48 @@ public class ViewAllBooks implements Command {
 	private static final String MESSAGE_ERROR_VIEW_ALL_BOOKS = "Error at ViewAllBooks";
 
 	private static final Logger LOGGER = LogManager.getRootLogger();
-	
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	ServiceFactory factory = ServiceFactory.getInstance();
-	BookService bookService = factory.getBookService();
 
-	try
-	{
-		ArrayList<Book> List = bookService.showBooks();
-		if (List.size() == 0) {
+		ServiceFactory factory = ServiceFactory.getInstance();
+		BookService bookService = factory.getBookService();
 
-			request.setAttribute(MESSAGE_INFO, MESSAGE_NO_BOOKS);
-			
-		} else {
-			String messageInfo= request.getParameter(MESSAGE_INFO);//Book successful delete or no such book
-			request.setAttribute(MESSAGE_INFO, messageInfo);
+		try {
+			ArrayList<Book> List = bookService.showBooks();
+			if (List.size() == 0) {
 
-			String messageWrongAuthorization = request.getParameter(MESSAGE);
-			request.setAttribute(MESSAGE, messageWrongAuthorization);
-			
-			String messageErrorAuthorization = request.getParameter(ERROR_MESSAGE);
-			request.setAttribute(ERROR_MESSAGE, messageErrorAuthorization);
-			
-			request.setAttribute(LIST, List);
-			
+				request.setAttribute(MESSAGE_INFO, MESSAGE_NO_BOOKS);
+
+			} else {
+				String messageInfo = request.getParameter(MESSAGE_INFO);// Book
+																		// successful
+																		// delete
+																		// or no
+																		// such
+																		// book
+				request.setAttribute(MESSAGE_INFO, messageInfo);
+
+				String messageWrongAuthorization = request.getParameter(MESSAGE);
+				request.setAttribute(MESSAGE, messageWrongAuthorization);
+
+				String messageErrorAuthorization = request.getParameter(ERROR_MESSAGE);
+				request.setAttribute(ERROR_MESSAGE, messageErrorAuthorization);
+
+				request.setAttribute(LIST, List);
+
+			}
+		} catch (ServiceException e) {
+
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_VIEW_ALL_BOOKS, e);
+
+			request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
+
 		}
-	}catch(ServiceException e){
-	
-		LOGGER.log(Level.ERROR, MESSAGE_ERROR_VIEW_ALL_BOOKS, e);	
-		
-		request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
-		
-	}
 
-	RequestDispatcher dispatcher = request.getRequestDispatcher(TAKE_ALL_JSP);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(TAKE_ALL_JSP);
 
-	dispatcher.forward(request,response);
-
+		dispatcher.forward(request, response);
 
 	}
 

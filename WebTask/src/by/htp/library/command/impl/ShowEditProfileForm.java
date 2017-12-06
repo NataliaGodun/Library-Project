@@ -14,11 +14,14 @@ import by.htp.library.command.Command;
  * @version 1.0
  */
 public class ShowEditProfileForm implements Command {
-	private static final String EDIT_PROFILE_JSP ="WEB-INF/jsp/EditProfile.jsp";
+	
+	private static final String EDIT_PROFILE_JSP = "WEB-INF/jsp/EditProfile.jsp";
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	RequestDispatcher dispatcher=request.getRequestDispatcher(EDIT_PROFILE_JSP);
 		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(EDIT_PROFILE_JSP);
+
 		dispatcher.forward(request, response);
 	}
 

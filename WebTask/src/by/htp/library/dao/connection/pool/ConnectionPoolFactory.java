@@ -6,7 +6,7 @@ package by.htp.library.dao.connection.pool;
  */
 
 public final class ConnectionPoolFactory {
-	
+
 	private static final ConnectionPoolFactory instance = new ConnectionPoolFactory();
 	private final ConnectionPool pool = new ConnectionPoolimpl();
 

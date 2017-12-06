@@ -7,6 +7,7 @@ import by.htp.library.service.exception.ServiceException;
 
 /**
  * Ñhecks the parameters and passes control to the dao layer
+ * 
  * @author Godun Natalia
  * @version 1.0
  */

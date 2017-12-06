@@ -12,7 +12,10 @@ html, body {
 	text-align: center; margin: -70px 200px 0px 150px;color: #ffff1a
 }
 #main{
- 	background: #d9a54f; /* Цвет фона */
+	
+background: #d9a54f; /* Цвет фона */
+ 	-o-background-size: cover;
+        background-size: cover;
  	margin:auto;
  	padding: 5px;
 }

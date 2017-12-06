@@ -13,12 +13,14 @@ import by.htp.library.command.Command;
  * @version 1.0
  */
 public class ShowAddNewBookForm implements Command {
-	private static final String ADD_NEW_BOOK_JSP ="WEB-INF/jsp/addNewBook.jsp";
+
+	private static final String ADD_NEW_BOOK_JSP = "WEB-INF/jsp/addNewBook.jsp";
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		RequestDispatcher dispatcher=request.getRequestDispatcher(ADD_NEW_BOOK_JSP);
-		
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher(ADD_NEW_BOOK_JSP);
+
 		dispatcher.forward(request, response);
 	}
 

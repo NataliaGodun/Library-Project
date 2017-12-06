@@ -8,9 +8,10 @@ import by.htp.library.domain.User;
  * @version 1.0
  */
 public interface UserDAO {
-	
+
 	/**
 	 * check the user from database
+	 * 
 	 * @param login
 	 * @param password
 	 */
@@ -18,6 +19,7 @@ public interface UserDAO {
 
 	/**
 	 * add the user to database
+	 * 
 	 * @param name
 	 * @param login
 	 * @param password
@@ -26,15 +28,17 @@ public interface UserDAO {
 
 	/**
 	 * edit a name of the user in a profile
+	 * 
 	 * @param name
 	 * @param login
 	 */
-	User editProfileName(String name, String login)throws DAOException;
+	User editProfileName(String name, String login) throws DAOException;
 
 	/**
 	 * edit a password of the user in a profile
+	 * 
 	 * @param password
 	 * @param login
 	 */
-	User editProfilePassword(String password, String login)throws DAOException;
+	User editProfilePassword(String password, String login) throws DAOException;
 }

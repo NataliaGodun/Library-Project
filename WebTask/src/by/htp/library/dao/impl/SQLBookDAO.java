@@ -33,29 +33,29 @@ public class SQLBookDAO implements BookDAO {
 	private static final String MESSAGE_ERROR_CONNECTION_POOL = "Error at connection pool.";
 	private static final String MESSAGE_ERROR_SQL = "Error at sql.";
 	private static final String MESSAGE_ERROR_REMOVE_CONNECTION = "Error at remove connection.";
-	private static final int FIRST= 1;
+	private static final int FIRST = 1;
 	private static final int SECOND = 2;
 	private static final int THIRD = 3;
 	private static final int FOURTH = 4;
 	private static final int FIFTH = 5;
 	private static final int SIXTH = 6;
 	private static final int SEVENTH = 7;
-	
+
 	private static final Logger LOGGER = LogManager.getRootLogger();
 
 	@Override
-	public ArrayList<Book> showBook() throws DAOException{
+	public ArrayList<Book> showBook() throws DAOException {
 		Connection con = null;
 		ResultSet rs = null;
-		Book book=null;
-		
-		ArrayList <Book> List = new ArrayList<Book>();
-		
+		Book book = null;
+
+		ArrayList<Book> List = new ArrayList<Book>();
+
 		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
 		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
 
 		try {
-			
+
 			con = cp.takeConnection();
 			PreparedStatement ps = con.prepareStatement(SELECT_ALL_BOOK);
 			rs = ps.executeQuery();
@@ -67,55 +67,53 @@ public class SQLBookDAO implements BookDAO {
 				String genre = rs.getString(FIFTH);
 				String house = rs.getString(SIXTH);
 				String year = rs.getString(SEVENTH);
-				
-				book = new Book(id,writer, nameBook, image,genre,house,year);
+
+				book = new Book(id, writer, nameBook, image, genre, house, year);
 				List.add(book);
 			}
 		} catch (ConnectionPoolException e) {
-			LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_POOL , e);	
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_CONNECTION_POOL, e);
 			throw new DAOException(e);
 		} catch (SQLException e) {
-			LOGGER.log(Level.ERROR,MESSAGE_ERROR_SQL, e);	
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_SQL, e);
 			throw new DAOException(e);
-		}
-		finally{
+		} finally {
 			try {
 				cp.removeConnection();
 			} catch (ConnectionPoolException e) {
-				LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_CONNECTION , e);	
+				LOGGER.log(Level.ERROR, MESSAGE_ERROR_REMOVE_CONNECTION, e);
 			}
 		}
-		
-		return List;			
+
+		return List;
 	}
-	
 
 	@Override
-	public Book addBook( Book book) throws DAOException {
-		
+	public Book addBook(Book book) throws DAOException {
+
 		Connection con = null;
 		ResultSet rs = null;
-		
+
 		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
 		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
-	
+
 		try {
 			con = cp.takeConnection();
-			
+
 			PreparedStatement ps = con.prepareStatement(ADD_BOOK);
-	
+
 			ps.setString(FIRST, book.getWriter());
-			ps.setString(SECOND,  book.getNameBook());
-			ps.setString(THIRD,book.getImage());
-			ps.setString(FOURTH,book.getGenre());
-			ps.setString(FIFTH,book.getHouse());
-			ps.setString(SIXTH,book.getYear());
-	
+			ps.setString(SECOND, book.getNameBook());
+			ps.setString(THIRD, book.getImage());
+			ps.setString(FOURTH, book.getGenre());
+			ps.setString(FIFTH, book.getHouse());
+			ps.setString(SIXTH, book.getYear());
+
 			ps.executeUpdate();
 
 			ps = con.prepareStatement(BOOK_SELECT);
 			ps.setString(FIRST, book.getWriter());
-			ps.setString(SECOND, book.getNameBook() );
+			ps.setString(SECOND, book.getNameBook());
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt(FIRST);
@@ -125,23 +123,21 @@ public class SQLBookDAO implements BookDAO {
 				String Genre = rs.getString(FIFTH);
 				String House = rs.getString(SIXTH);
 				String Year = rs.getString(SEVENTH);
-				
-				book = new Book(id,Writer, NameBook, Image,Genre,House,Year);
+
+				book = new Book(id, Writer, NameBook, Image, Genre, House, Year);
 			}
-			
 
 		} catch (ConnectionPoolException e) {
-			LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_POOL, e);	
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_CONNECTION_POOL, e);
 			throw new DAOException(e);
 		} catch (SQLException e) {
-			LOGGER.log(Level.ERROR,MESSAGE_ERROR_SQL, e);	
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_SQL, e);
 			throw new DAOException(e);
-		}
-		finally{
+		} finally {
 			try {
 				cp.removeConnection();
 			} catch (ConnectionPoolException e) {
-				LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_CONNECTION , e);	
+				LOGGER.log(Level.ERROR, MESSAGE_ERROR_REMOVE_CONNECTION, e);
 			}
 		}
 		return book;
@@ -149,10 +145,10 @@ public class SQLBookDAO implements BookDAO {
 
 	@Override
 	public Book viewBook(int id) throws DAOException {
-		
+
 		Connection con = null;
 		ResultSet rs = null;
-		Book book= null;
+		Book book = null;
 
 		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
 		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
@@ -163,10 +159,10 @@ public class SQLBookDAO implements BookDAO {
 			PreparedStatement ps = con.prepareStatement(SELECT_BOOK_ID);
 
 			ps.setInt(FIRST, id);
-			
+
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				
+
 				int idDB = rs.getInt(FIRST);
 				String writer = rs.getString(SECOND);
 				String nameBook = rs.getString(THIRD);
@@ -174,56 +170,51 @@ public class SQLBookDAO implements BookDAO {
 				String genre = rs.getString(FIFTH);
 				String house = rs.getString(SIXTH);
 				String year = rs.getString(SEVENTH);
-				
-				book = new Book(idDB,writer, nameBook, image,genre,house,year);
+
+				book = new Book(idDB, writer, nameBook, image, genre, house, year);
 			}
-			
 
 		} catch (ConnectionPoolException e) {
-			LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_POOL, e);	
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_CONNECTION_POOL, e);
 			throw new DAOException(e);
 		} catch (SQLException e) {
-			LOGGER.log(Level.ERROR,MESSAGE_ERROR_SQL, e);	
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_SQL, e);
 			throw new DAOException(e);
-		}
-		finally{
+		} finally {
 			try {
 				cp.removeConnection();
 			} catch (ConnectionPoolException e) {
-				LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_CONNECTION , e);	
+				LOGGER.log(Level.ERROR, MESSAGE_ERROR_REMOVE_CONNECTION, e);
 			}
 		}
 		return book;
 	}
 
 	@Override
-	public void deleteBook(int  id) throws DAOException {
+	public void deleteBook(int id) throws DAOException {
 		Connection con = null;
-		
-		
+
 		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
 		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
 		try {
 			con = cp.takeConnection();
-			
+
 			PreparedStatement ps = con.prepareStatement(DELETE_BOOK_ID);
 			ps.setInt(FIRST, id);
-			
+
 			ps.executeUpdate();
-			
-			
+
 		} catch (ConnectionPoolException e) {
-			LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_POOL, e);	
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_CONNECTION_POOL, e);
 			throw new DAOException(e);
 		} catch (SQLException e) {
-			LOGGER.log(Level.ERROR,MESSAGE_ERROR_SQL, e);	
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_SQL, e);
 			throw new DAOException(e);
-		}
-		finally{
+		} finally {
 			try {
 				cp.removeConnection();
 			} catch (ConnectionPoolException e) {
-				LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_CONNECTION , e);	
+				LOGGER.log(Level.ERROR, MESSAGE_ERROR_REMOVE_CONNECTION, e);
 			}
 		}
 	}
@@ -232,7 +223,7 @@ public class SQLBookDAO implements BookDAO {
 	public Book searchBook(String nameBook) throws DAOException {
 		Connection con = null;
 		ResultSet rs = null;
-		Book book= null;
+		Book book = null;
 
 		ConnectionPoolFactory ObjectCPFactory = ConnectionPoolFactory.getInstance();
 		ConnectionPool cp = ObjectCPFactory.getConnectionPool();
@@ -243,11 +234,10 @@ public class SQLBookDAO implements BookDAO {
 			PreparedStatement ps = con.prepareStatement(SELECT_NAME_OF_BOOK);
 
 			ps.setString(FIRST, nameBook);
-			
-			
+
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				
+
 				int id = rs.getInt(FIRST);
 				String writer = rs.getString(SECOND);
 				String namebook = rs.getString(THIRD);
@@ -255,26 +245,24 @@ public class SQLBookDAO implements BookDAO {
 				String genre = rs.getString(FIFTH);
 				String house = rs.getString(SIXTH);
 				String year = rs.getString(SEVENTH);
-				
-				book = new Book(id,writer, namebook, image,genre,house,year);
+
+				book = new Book(id, writer, namebook, image, genre, house, year);
 			}
-			
+
 		} catch (ConnectionPoolException e) {
-			LOGGER.log(Level.ERROR,MESSAGE_ERROR_CONNECTION_POOL, e);	
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_CONNECTION_POOL, e);
 			throw new DAOException(e);
 		} catch (SQLException e) {
-			LOGGER.log(Level.ERROR,MESSAGE_ERROR_SQL, e);	
+			LOGGER.log(Level.ERROR, MESSAGE_ERROR_SQL, e);
 			throw new DAOException(e);
-		}
-		finally{
+		} finally {
 			try {
 				cp.removeConnection();
 			} catch (ConnectionPoolException e) {
-				LOGGER.log(Level.ERROR,MESSAGE_ERROR_REMOVE_CONNECTION , e);	
+				LOGGER.log(Level.ERROR, MESSAGE_ERROR_REMOVE_CONNECTION, e);
 			}
 		}
 		return book;
 	}
-
 
 }

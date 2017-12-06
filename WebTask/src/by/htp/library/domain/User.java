@@ -7,28 +7,29 @@ import java.io.Serializable;
  * @version 1.0
  */
 public class User implements Serializable {
-	
+
 	private static final long serialVersionUID = -8029435420827813184L;
-	
+
 	private int id;
 	private String name;
 	private String login;
 	private String password;
 	private String role;
-	
-	public User(){
-		
+
+	public User() {
+
 	}
-	
-	public User(int id,String name,String login,String password,String role) {
+
+	public User(int id, String name, String login, String password, String role) {
 		super();
-		this.id=id;
-		this.name=name;
-		this.login=login;
-		this.password=password;
-		this.role=role;
-		
+		this.id = id;
+		this.name = name;
+		this.login = login;
+		this.password = password;
+		this.role = role;
+
 	}
+
 	public String getLogin() {
 		return login;
 	}
@@ -52,7 +53,6 @@ public class User implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
 
 	public String getName() {
 		return name;
@@ -115,8 +115,8 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
-	
-	public String toString() { 
-	    return "Id: " + this.id+ ", name: '" + this.name + ", login: " + this.login+ ", role: "+this.role;
-	} 
+
+	public String toString() {
+		return "Id: " + this.id + ", name: '" + this.name + ", login: " + this.login + ", role: " + this.role;
+	}
 }

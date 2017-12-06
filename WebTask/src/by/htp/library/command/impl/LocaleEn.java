@@ -14,13 +14,13 @@ import by.htp.library.command.Command;
  * @version 1.0
  */
 public class LocaleEn implements Command {
-	private static final String LOCALE_EN= "WEB-INF/jsp/localeEn.jsp";
+	private static final String LOCALE_EN = "WEB-INF/jsp/localeEn.jsp";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		RequestDispatcher dispatcher=request.getRequestDispatcher(LOCALE_EN);
-		
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher(LOCALE_EN);
+
 		dispatcher.forward(request, response);
 	}
 

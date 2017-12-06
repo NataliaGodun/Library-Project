@@ -10,16 +10,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<fmt:setLocale value="en" />
-			<c:if test="${ not empty  requestScope.locale}">
-				<c:set var="language" value="${requestScope.locale}" scope="session" />
-				<fmt:setLocale value="${language}" />
-			</c:if>
+	<fmt:setLocale value="en" />
+	<c:if test="${ not empty  requestScope.locale}">
+		<c:set var="language" value="${requestScope.locale}" scope="session" />
+		<fmt:setLocale value="${language}" />
+	</c:if>
 	<fmt:setBundle basename="resources.pagecontent" scope="session" />
 
 	<fmt:message key="label.welcome" />
 
-	
+
 	<form action="Controller" method="post">
 		<input type="hidden" name="command" value="authorization" />
 		<fmt:message key="label.login" />
@@ -30,7 +30,7 @@
 		<c:if test="${not empty  requestScope.errorMessage }">
 			<c:out value="${  requestScope.errorMessage }" />
 		</c:if>
-		
+
 	</form>
 
 </body>

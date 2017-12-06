@@ -8,10 +8,9 @@
 </head>
 <body>
 	<form action="Controller" method="post">
-		<input type="hidden" name="command" value="EditProfileName" /> 
-		Enter new name:<br /> <br /> 
-		<input type="text" name="name" value="" /> 
-		<input type="submit" value="Keep changes" /> <br />
+		<input type="hidden" name="command" value="EditProfileName" /> Enter
+		new name:<br /> <br /> <input type="text" name="name" value="" /> <input
+			type="submit" value="Keep changes" /> <br />
 
 	</form>
 </body>
