@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Welcome</title>
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/style2.css" />" />
+	href="<c:url value="/resources/css/style4main.css" />" />
 </head>
 <body>
 
@@ -25,48 +25,62 @@
 			</div>
 		</div>
 		<br /> <br />
-		<h1>
-			Hello,
-			<c:out value="${ sessionScope.name} " />
-		</h1>
-		<br />
-		<c:if test="${not empty requestScope.message }">
-			<br />
-			<c:out value="${requestScope.message }" />
-		</c:if>
-		<br />
-		<form action="Controller" method="get">
-			<input type="hidden" name="command" value="viewAllBooks" /> <br />
-			<input type="submit" value="View all books" />
-		</form>
+		<div id="welcome">
+			<h1>
+				<fmt:message key="label.welcome" />
+				,
+				<c:out value="${sessionScope.name }" />
+				!
+			</h1>
 
-		<c:if test="${not empty requestScope.errorMessage }">
-			<br />
-			<c:out value="${requestScope.errorMessage }" />
-		</c:if>
+		</div>
 
-		<br />
-		<form action="Controller" method="get">
-			<input type="hidden" name="command" value="showEditProfileForm" /> <br />
-			<input type="submit" value="Edit profile" />
-		</form>
-		<c:if test="${sessionScope.role=='admin' }">
+
+		<div id="content">
+			<c:if test="${not empty requestScope.message }">
+				<br />
+				<br />
+				<c:out value="${requestScope.message }" />
+				<br />
+			</c:if>
+
+			<form action="Controller" method="get">
+				<input type="hidden" name="command" value="viewAllBooks" /> <br />
+				<input type="submit" value=<fmt:message key="label.viewAllBooks" /> />
+			</form>
+
+			<c:if test="${not empty requestScope.errorMessage }">
+				<br />
+				<c:out value="${requestScope.errorMessage }" />
+			</c:if>
+
 			<br />
 			<form action="Controller" method="get">
-				<input type="hidden" name="command" value="showAddNewBookForm" /> <br />
-				<input type="submit" value="Add book" />
+				<input type="hidden" name="command" value="showEditProfileForm" />
+				<br /> <input type="submit"
+					value=<fmt:message key="label.editProfile" /> />
 			</form>
+			<c:if test="${sessionScope.role=='admin' }">
+				<br />
+				<form action="Controller" method="get">
+					<input type="hidden" name="command" value="showAddNewBookForm" />
+					<br /> <input type="submit"
+						value=<fmt:message key="label.addNewBook" /> />
+				</form>
+				<br />
+
+			</c:if>
 			<br />
+			<form action="Controller" method="get">
+				<input type="hidden" name="command" value="exit" /> <br /> <input
+					type="submit" value=<fmt:message key="label.exit" /> />
+			</form>
+		</div>
 
-		</c:if>
-		<br />
-		<form action="Controller" method="get">
-			<input type="hidden" name="command" value="exit" /> <br /> <input
-				type="submit" value="Exit" />
-		</form>
-
-		<div id="footer">All right reserved</div>
+		<div id="footer">
+			<br /> <br />
+			<fmt:message key="label.allRightReserved" />
+		</div>
 	</div>
-
 </body>
 </html>

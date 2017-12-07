@@ -45,15 +45,15 @@
 
 			<div id="information">
 
-				<strong>Name:</strong>
+				<strong><fmt:message key="label.name" /></strong>
 				<c:out value=" ${requestScope.book.nameBook}" />
-				<br /> <strong>Writer:</strong>
+				<br /> <strong><fmt:message key="label.writer" /></strong>
 				<c:out value=" ${requestScope.book.writer}" />
-				<br /> <strong>Genre:</strong>
+				<br /> <strong><fmt:message key="label.genre" /></strong>
 				<c:out value="${ requestScope.book.genre}" />
-				<br /> <strong>Published House:</strong>
+				<br /> <strong><fmt:message key="label.publishedHouse" /></strong>
 				<c:out value="${requestScope.book.house}" />
-				<br /> <strong>Year:</strong>
+				<br /> <strong><fmt:message key="label.year" /></strong>
 				<c:out value="${ requestScope.book.year}" />
 				<br />
 			</div>
@@ -71,7 +71,7 @@
 
 				<a
 					href="${pageContext.request.contextPath}/Controller?command=DeleteBook&id=${requestScope.book.id}"
-					onclick="if (!(confirm('Are you sure you want to delete this book?'))) return false">DELETE</a>
+					onclick="if (!(confirm('Are you sure you want to delete this book?'))) return false"><fmt:message key="label.deleteBook" /></a>
 				<br />
 			</c:if>
 
@@ -81,13 +81,15 @@
 
 				<input type="hidden" name="command" value="viewAllBooks" /> <input
 					type="hidden" name="loc" value="${requestScope.locale}"> <input
-					type="submit" value="View all books" />
+					type="submit" value=<fmt:message key="label.viewAllBooks" /> />
 			</form>
 		</div>
 
 		<br /> <br /> <br /> <br /> <br />
 
-		<div id="footer">All right reserved</div>
+		<div id="footer">
+			<fmt:message key="label.allRightReserved" />
+		</div>
 		<br /> <br />
 
 

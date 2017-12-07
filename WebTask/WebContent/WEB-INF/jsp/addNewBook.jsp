@@ -8,7 +8,7 @@
 <title>File Upload</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/style2.css" />" />
+	href="<c:url value="/resources/css/style4simple.css" />" />
 </head>
 <body>
 
@@ -30,18 +30,29 @@
 			<br />
 			<c:out value="${requestScope.errorMessage }" />
 		</c:if>
-		<form action="ImageController" method="post"
-			enctype="multipart/form-data">
-			writer: <input type="text" value="" name="writer" /> <br /> name
-			book: <input type="text" value="" name="nameBook" /> <br /> genre: <input
-				type="text" value="" name="genre" /> <br /> house: <input
-				type="text" value="" name="house" /> <br /> year : <input
-				type="text" value="" name="year" /> <br /> File: <input type="file"
-				name="file" id="file" /> <br /> <input type="submit" value="Upload"
-				name="upload" id="upload" />
-		</form>
-
-		<div id="footer">All right reserved</div>
+		<div id="content">
+			<form action="ImageController" method="post"
+				enctype="multipart/form-data">
+				<fmt:message key="label.writer" />
+				<input type="text" value="" name="writer" /> <br /> <br />
+				<fmt:message key="label.name" />
+				<input type="text" value="" name="nameBook" /> <br /> <br />
+				<fmt:message key="label.genre" />
+				<input type="text" value="" name="genre" /> <br /> <br />
+				<fmt:message key="label.publishedHouse" />
+				<input type="text" value="" name="house" /> <br /> <br />
+				<fmt:message key="label.year" />
+				<input type="text" value="" name="year" /> <br /> <br />
+				<fmt:message key="label.file" />
+				<input type="file" name="file" id="file" /> <br /> <input
+					type="submit" value="<fmt:message key="label.upload" />"
+					name="upload" id="upload" />
+			</form>
+		</div>
+		<div id="footer">
+			<br />
+			<fmt:message key="label.allRightReserved" />
+		</div>
 	</div>
 </body>
 </html>

@@ -6,22 +6,51 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/style4simple.css" />" />
+<title>Registration</title>
 </head>
 <body>
 
-	<fmt:setBundle basename="resources.pagecontent" scope="session" />
+	<div id="main">
 
-	<fmt:message key="label.welcome" />
-	<form action="Controller" method="post">
-		<input type="hidden" name="command" value="registration" />
-		<fmt:message key="label.nickname" />
-		<br /> <input type="text" name="name" value="" /><br />
-		<fmt:message key="label.login" />
-		<br /> <input type="text" name="login" value="" /><br />
-		<fmt:message key="label.password" />
-		<br /> <input type="password" name="password" value="" /><br /> <input
-			type="submit" value="registration" />
-	</form>
+		<div id="wrapper">
+			<div id="header">
+				<img
+					src="${pageContext.request. contextPath}/resources/images/books.jpg"
+					width="100%" />
+				<h1>
+					<fmt:message key="label.electronicLibrary" />
+				</h1>
+			</div>
+		</div>
+
+		<fmt:setBundle basename="resources.pagecontent" scope="session" />
+		<div id="welcome">
+			<h1>
+				<br />
+				<fmt:message key="label.welcome" />
+				!!
+			</h1>
+		</div>
+		<div id="content">
+
+			<form action="Controller" method="post">
+				<input type="hidden" name="command" value="registration" />
+				<fmt:message key="label.nickname" />
+				<br /> <input type="text" name="name" value="" /><br />
+				<fmt:message key="label.login" />
+				<br /> <input type="text" name="login" value="" /><br />
+				<fmt:message key="label.password" />
+				<br /> <input type="password" name="password" value="" /><br /> <br />
+				<input type="submit" value="Registration" />
+			</form>
+		</div>
+		<div id="footer">
+			<br /> <br /> <br />
+			<fmt:message key="label.allRightReserved" />
+		</div>
+
+	</div>
 </body>
 </html>

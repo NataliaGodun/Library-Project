@@ -11,10 +11,7 @@
 	href="<c:url value="/resources/css/style.css"/>" />
 </head>
 <body>
-
-
 	<fmt:setBundle basename="resources.pagecontent" scope="session" />
-
 
 	<div id="main">
 
@@ -97,15 +94,15 @@
 
 						<div id="information">
 
-							<strong>Name:</strong>
+							<strong><fmt:message key="label.name" /></strong>
 							<c:out value=" ${List.nameBook}" />
-							<br /> <strong>Writer:</strong>
+							<br /> <strong><fmt:message key="label.writer" /></strong>
 							<c:out value=" ${List.writer}" />
-							<br /> <strong>Genre:</strong>
+							<br /> <strong><fmt:message key="label.genre" /></strong>
 							<c:out value="${ List.genre}" />
-							<br /> <strong>Published House:</strong>
+							<br /> <strong><fmt:message key="label.publishedHouse" /></strong>
 							<c:out value="${ List.house}" />
-							<br /> <strong>Year:</strong>
+							<br /> <strong><fmt:message key="label.year" /></strong>
 							<c:out value="${ List.year}" />
 							<br /> <br />
 							<form action="Controller" method="get">
@@ -140,7 +137,6 @@
 
 				<br />
 
-
 				<form action="Controller" method="get">
 					<input type="hidden" name="command" value="SHOWREGISTRATIONFORM" />
 					<input type="submit" value=<fmt:message key="label.registration" /> />
@@ -158,8 +154,6 @@
 
 			</div>
 		</div>
-
-
 
 		<div id="footer">
 			<fmt:message key="label.allRightReserved" />
